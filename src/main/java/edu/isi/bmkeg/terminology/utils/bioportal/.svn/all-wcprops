@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repository/!svn/ver/4050/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/terminology/utils/bioportal
+END
+BioPortalSearchHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/repository/!svn/ver/3475/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/terminology/utils/bioportal/BioPortalSearchHandler.java
+END
+BioportalSearch.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/repository/!svn/ver/4050/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/terminology/utils/bioportal/BioportalSearch.java
+END
+BioPortalOntologyHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/repository/!svn/ver/4050/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/terminology/utils/bioportal/BioPortalOntologyHandler.java
+END
+BioPortalConceptHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/repository/!svn/ver/4050/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/terminology/utils/bioportal/BioPortalConceptHandler.java
+END

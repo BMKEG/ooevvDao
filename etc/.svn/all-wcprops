@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repository/!svn/ver/4500/code/ooevv/trunk/library/etc
+END
+bmkeg.properties
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repository/!svn/ver/3478/code/ooevv/trunk/library/etc/bmkeg.properties
+END
+bmkegtest.properties
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/repository/!svn/ver/4500/code/ooevv/trunk/library/etc/bmkegtest.properties
+END
+users.properties
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/etc/users.properties
+END

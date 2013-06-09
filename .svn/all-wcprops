@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/.classpath
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/.project
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/pom.xml
+END

@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repository/!svn/ver/3698/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl
+END
+test.owl
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/test.owl
+END
+ro.owl
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/ro.owl
+END
+ooevv2.owl
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repository/!svn/ver/3698/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/ooevv2.owl
+END
+ooevv3.owl
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repository/!svn/ver/3698/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/ooevv3.owl
+END
+ro_bfo_bridge1_1.owl
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/ro_bfo_bridge1_1.owl
+END
+kefed_v0.1.4.owl
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/kefed_v0.1.4.owl
+END
+ontology-metadata.owl
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/ontology-metadata.owl
+END
+protege-dc.owl
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/protege-dc.owl
+END
+iao-main.owl
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/iao-main.owl
+END
+tte.owl
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/tte.owl
+END
+kefed_v0.1.4.pprj
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/kefed_v0.1.4.pprj
+END
+1.1.owl
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/1.1.owl
+END
+kefed_v0.1.4.repository
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/kefed_v0.1.4.repository
+END
+obi.owl
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/obi.owl
+END
+ooevv-v0.0.1.owl
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repository/!svn/ver/3040/code/ooevv/trunk/library/src/main/resources/edu/isi/bmkeg/ooevv/owl/ooevv-v0.0.1.owl
+END

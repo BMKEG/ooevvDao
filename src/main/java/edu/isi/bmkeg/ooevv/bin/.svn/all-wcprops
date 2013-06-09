@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin
+END
+GenerateOoEVVSpreadsheet.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repository/!svn/ver/3698/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/GenerateOoEVVSpreadsheet.java
+END
+OoevvDirToDatabase.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/OoevvDirToDatabase.java
+END
+OoevvDatabaseToOWL.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/OoevvDatabaseToOWL.java
+END
+GenerateOoevvOwlFile.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/GenerateOoevvOwlFile.java
+END
+OoEVVSpreadsheetToOWL.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/OoEVVSpreadsheetToOWL.java
+END
+OoevvSvnToDatabase.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/OoevvSvnToDatabase.java
+END
+BuildPopulatedOoevvArchive.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/BuildPopulatedOoevvArchive.java
+END
+GenerateOoEVVDatabase.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/repository/!svn/ver/3698/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/GenerateOoEVVDatabase.java
+END
+OoEVVSpreadsheetToDatabase.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/repository/!svn/ver/5622/code/ooevv/trunk/library/src/main/java/edu/isi/bmkeg/ooevv/bin/OoEVVSpreadsheetToDatabase.java
+END
