@@ -90,6 +90,33 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 		return vbogs;
 	}
 
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// Construct sets of OoEVV Elements from database
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	/*public Set<OoevvProcess> listProcessesInDatabase(OoevvElementSet exptVbSet) {
+
+		OoevvProcess_qo op_qo = new OoevvProcess_qo();
+		
+	}
+	
+	public Set<OoevvEntity> listEntitiesInObjectGraph(
+			OoevvElementSet exptVbSet) {
+
+		Set<OoevvEntity> entities = new HashSet<OoevvEntity>();
+
+		Iterator<OoevvElement> entityIt = exptVbSet.getElements().iterator();
+		while (entityIt.hasNext()) {
+			OoevvElement el = entityIt.next();
+			if( el instanceof OoevvEntity ) {	
+				OoevvEntity entity = (OoevvEntity) el;	
+				entities.add(entity);
+			}
+		}
+
+		return entities;
+	}*/
+	
+	
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// Insert data into database from Object Graph
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

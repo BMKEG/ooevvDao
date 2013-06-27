@@ -369,18 +369,25 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 	}
 
-	public HSSFWorkbook generateOoevvExcelWorkbook(File file,
-			OoevvElementSet exptVbSet) throws Exception {
+	public HSSFWorkbook generateOoevvExcelWorkbook(OoevvElementSet exptVbSet) 
+			throws Exception {
 
 		Set<ExperimentalVariable> exptVbs = ExtendedOoevvDaoImpl.listExptVbsInObjectGraph(exptVbSet);
 		Set<MeasurementScale> scales = ExtendedOoevvDaoImpl.listScalesInObjectGraph(exptVbSet);
 		Set<OoevvProcess> processes = ExtendedOoevvDaoImpl.listProcessesInObjectGraph(exptVbSet);
 		Set<OoevvEntity> entities = ExtendedOoevvDaoImpl.listEntitiesInObjectGraph(exptVbSet);
-
+		
+		return this.generateOoevvExcelWorkbook(exptVbs, scales, processes, entities);
+	
+	}
+		
+	public HSSFWorkbook generateOoevvExcelWorkbook(Set<ExperimentalVariable> exptVbs, 
+			Set<MeasurementScale> scales,
+			Set<OoevvProcess> processes,
+			Set<OoevvEntity> entities ) throws Exception {
+		
 		Map<Term, MeasurementValue> values = new HashMap<Term, MeasurementValue>();
 		Set<Person> curators = new HashSet<Person>();
-
-		FileOutputStream out = new FileOutputStream(file);
 
 		// create a new workbook
 		HSSFWorkbook wb = new HSSFWorkbook();
@@ -923,9 +930,27 @@ public class OoevvExcelEngine extends ExcelEngine {
 		return this.createExpVariableSetFromExcel(f, false);
 
 	}
+
+	public OoevvElementSet createExpVariableSetFromExcel(byte[] data, boolean includeLookup)
+			throws Exception {
+		
+		this.readByteArray(data);
+
+		return this.createExpVariableSetFromExcel(includeLookup);
+		
+	}
 	
 	public OoevvElementSet createExpVariableSetFromExcel(File f, boolean includeLookup)
 			throws Exception {
+
+		this.readFile(f);
+		
+		return this.createExpVariableSetFromExcel(includeLookup);
+		
+	}
+	
+	public OoevvElementSet createExpVariableSetFromExcel(boolean includeLookup)
+				throws Exception {
 
 		Ontology ooevv = this.buildOoEVV();
 
@@ -933,8 +958,6 @@ public class OoevvExcelEngine extends ExcelEngine {
 		Map<CompositeScale, String> compositeScales = new HashMap<CompositeScale, String>();
 		Map<String, ExperimentalVariable> exVbLookup = new HashMap<String, ExperimentalVariable>();
 		Map<MeasurementValue, String> valueScaleLookup = new HashMap<MeasurementValue, String>();
-		
-		this.readFile(f);
 
 		// ____________________________________________
 
