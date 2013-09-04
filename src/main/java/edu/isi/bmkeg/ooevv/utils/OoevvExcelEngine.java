@@ -33,6 +33,7 @@ import edu.isi.bmkeg.ooevv.model.scale.BinaryScale;
 import edu.isi.bmkeg.ooevv.model.scale.BinaryScaleWithNamedValues;
 import edu.isi.bmkeg.ooevv.model.scale.CompositeScale;
 import edu.isi.bmkeg.ooevv.model.scale.DecimalScale;
+import edu.isi.bmkeg.ooevv.model.scale.FileScale;
 import edu.isi.bmkeg.ooevv.model.scale.HierarchicalScale;
 import edu.isi.bmkeg.ooevv.model.scale.IntegerScale;
 import edu.isi.bmkeg.ooevv.model.scale.MeasurementScale;
@@ -60,6 +61,7 @@ import edu.isi.bmkeg.terminology.utils.bioportal.BioportalSearch;
 import edu.isi.bmkeg.uml.model.UMLattribute;
 import edu.isi.bmkeg.uml.model.UMLclass;
 import edu.isi.bmkeg.uml.model.UMLmodel;
+import edu.isi.bmkeg.utils.Converters;
 import edu.isi.bmkeg.utils.excel.ExcelEngine;
 
 public class OoevvExcelEngine extends ExcelEngine {
@@ -71,6 +73,9 @@ public class OoevvExcelEngine extends ExcelEngine {
 	private OoevvElementSet exptVbSet;
 
 	private File dataDirectory;
+	
+	private byte[] fileBlob;
+	private String fileName;
 
 	private short bStyle = HSSFCellStyle.BORDER_THIN;
 	private short bStyle2 = HSSFCellStyle.BORDER_MEDIUM;
@@ -935,6 +940,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 			throws Exception {
 		
 		this.readByteArray(data);
+		this.fileBlob = data;
 
 		return this.createExpVariableSetFromExcel(includeLookup);
 		
@@ -944,6 +950,8 @@ public class OoevvExcelEngine extends ExcelEngine {
 			throws Exception {
 
 		this.readFile(f);
+		this.fileName = f.getName();
+		this.fileBlob = Converters.fileContentsToBytesArray(f);
 		
 		return this.createExpVariableSetFromExcel(includeLookup);
 		
@@ -975,6 +983,11 @@ public class OoevvExcelEngine extends ExcelEngine {
 		this.exptVbSet.setShortTermId(shortId);
 		this.exptVbSet.setDefinition(desc);
 		this.exptVbSet.setOntology(ooevv);
+		this.exptVbSet.setXlsFile(this.fileBlob);
+		if( this.fileName == null || this.fileName.length() == 0) {
+			this.fileName = name + "_ooevv.xls";
+		}
+		this.exptVbSet.setXlsFileName(this.fileName);
 
 		// ____________________________________________
 
@@ -1301,12 +1314,29 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				CompositeScale mvcs = (CompositeScale) ms;
 
+				if(sValues.size() == 0) {
+					throw new Exception("A composite scale must have at least one sub-variable");					
+				}
+
 				Iterator<String> idIt = sValues.iterator();
 				String s = idIt.next();
 				while (idIt.hasNext()) {
 					s += "," + idIt.next();
 				}
 				compositeScales.put(mvcs, s);
+				
+			} else if (sType.equals("FileScale")) {
+
+				ms = new FileScale();
+
+				FileScale fs = (FileScale) ms;
+
+				// Set the file extension in the first column
+				if(sValues.size() > 0) 
+					fs.setSuffix(sValues.get(0));
+				
+				if(sValues.size() > 1) 
+					fs.setMimeType(sValues.get(1));
 
 			} else {
 

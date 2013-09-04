@@ -390,26 +390,27 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			coreDao.getCe().connectToDB();
 			coreDao.getCe().turnOffAutoCommit();
 
+
 			//
 			// 1. insert the OoeVV ontology if it's not there.
 			//
-			ViewBasedObjectGraph vbog1 = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "Ontology");
+			ViewBasedObjectGraph vbog2 = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "Ontology");
 			Term t = terms.iterator().next();
 			Ontology ont = t.getOntology();
 			
-			ViewInstance vi1 = vbog1.objectGraphToView(ont);
-			Map<String, Object> objMap1 = vbog1.getObjMap();
-			coreDao.getCe().executeInsertQuery(vi1);
+			ViewInstance vi2 = vbog2.objectGraphToView(ont);
+			Map<String, Object> objMap2 = vbog2.getObjMap();
+			coreDao.getCe().executeInsertQuery(vi2);
 
-			Iterator<String> keyIt1 = objMap1.keySet().iterator();
-			while (keyIt1.hasNext()) {
-				String key = keyIt1.next();
-				PrimitiveInstance pi = (PrimitiveInstance) vi1.getSubGraph()
+			Iterator<String> keyIt2 = objMap2.keySet().iterator();
+			while (keyIt2.hasNext()) {
+				String key = keyIt2.next();
+				PrimitiveInstance pi = (PrimitiveInstance) vi2.getSubGraph()
 						.getNodes().get(key);
-				Object o = objMap1.get(key);
-				vbog1.primitiveToObject(pi, o, true);
+				Object o = objMap2.get(key);
+				vbog2.primitiveToObject(pi, o, true);
 			}
-
+			
 			//
 			// 2. insert all the different MeasurementValues as views
 			//
@@ -517,6 +518,14 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				}
 				Map<String, Object> objMap = vbog.getObjMap();
 
+				//
+				// Remove the set data from the update at this time...
+				// We will fill this in at the end. 
+				//
+				Map<String,SuperGraphNode> g = vi.getDefinition().getSubGraph().getNodes();
+				PrimitiveDefinition pd = (PrimitiveDefinition ) g.get("Set");
+				vi.nullify(pd);
+				
 				coreDao.getCe().executeInsertQuery(vi);
 
 				Iterator<String> keyIt = objMap.keySet().iterator();
@@ -576,9 +585,6 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 			}
 			
-			
-			
-
 			//
 			// 5. insert all the different Processes as views
 			//
@@ -599,6 +605,14 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				}
 				Map<String, Object> objMap = vbog.getObjMap();
 
+				//
+				// Remove the set data from the update at this time...
+				// We will fill this in at the end. 
+				//
+				Map<String,SuperGraphNode> g = vi.getDefinition().getSubGraph().getNodes();
+				PrimitiveDefinition pd = (PrimitiveDefinition ) g.get("Set");
+				vi.nullify(pd);
+				
 				coreDao.getCe().executeInsertQuery(vi);
 
 				Iterator<String> keyIt = objMap.keySet().iterator();
@@ -632,6 +646,14 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				}
 				Map<String, Object> objMap = vbog.getObjMap();
 
+				//
+				// Remove the set data from the update at this time...
+				// We will fill this in at the end. 
+				//
+				Map<String,SuperGraphNode> g = vi.getDefinition().getSubGraph().getNodes();
+				PrimitiveDefinition pd = (PrimitiveDefinition ) g.get("Set");
+				vi.nullify(pd);
+				
 				coreDao.getCe().executeInsertQuery(vi);
 
 				Iterator<String> keyIt = objMap.keySet().iterator();
@@ -648,21 +670,21 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			//
 			// 6. insert the OoevvElementSet as a view
 			//
-			ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "OoevvElementSet");
-			ViewInstance vi = vbog.objectGraphToView(exptVbSet);
-			Map<String, Object> objMap = vbog.getObjMap();
+			ViewBasedObjectGraph vbog1 = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "OoevvElementSet");
+			ViewInstance vi1 = vbog1.objectGraphToView(exptVbSet);
+			Map<String, Object> objMap1 = vbog1.getObjMap();
 
-			coreDao.getCe().executeInsertQuery(vi);
+			coreDao.getCe().executeInsertQuery(vi1);
 
-			Iterator<String> keyIt = objMap.keySet().iterator();
-			while (keyIt.hasNext()) {
-				String key = keyIt.next();
-				PrimitiveInstance pi = (PrimitiveInstance) vi.getSubGraph()
+			Iterator<String> keyIt1 = objMap1.keySet().iterator();
+			while (keyIt1.hasNext()) {
+				String key = keyIt1.next();
+				PrimitiveInstance pi = (PrimitiveInstance) vi1.getSubGraph()
 						.getNodes().get(key);
-				Object o = objMap.get(key);
-				vbog.primitiveToObject(pi, o, true);
+				Object o = objMap1.get(key);
+				vbog1.primitiveToObject(pi, o, true);
 			}
-
+			
 			coreDao.getCe().commitTransaction();
 
 		} catch (Exception e) {
