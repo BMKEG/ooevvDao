@@ -914,13 +914,13 @@ public class OoevvExcelEngine extends ExcelEngine {
 			r = s.createRow(rCount);
 
 			c = r.createCell((short) 0);
-			c.setCellValue(cur.getVpdmfId());
+			c.setCellValue( cur.getVpdmfId() );
 
 			c = r.createCell((short) 1);
-			c.setCellValue(cur.getFullName());
+			c.setCellValue( cur.getSurname() );
 
 			c = r.createCell((short) 2);
-			c.setCellValue(cur.getEmail());
+			c.setCellValue( cur.getEmail() );
 
 		}
 
@@ -1314,14 +1314,12 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				CompositeScale mvcs = (CompositeScale) ms;
 
-				if(sValues.size() == 0) {
-					throw new Exception("A composite scale must have at least one sub-variable");					
-				}
-
 				Iterator<String> idIt = sValues.iterator();
-				String s = idIt.next();
+				String s = "";
 				while (idIt.hasNext()) {
-					s += "," + idIt.next();
+					if( s.length() > 0 ) 
+						s += ",";
+					s += idIt.next();
 				}
 				compositeScales.put(mvcs, s);
 				
@@ -1657,13 +1655,18 @@ public class OoevvExcelEngine extends ExcelEngine {
 		// Now that we have a good list of variables constructed, 
 		// we can link the multi-variable scales. 
 		//
+		Pattern patt = Pattern.compile("^\\w+$");
 		Iterator<CompositeScale> compIt = compositeScales.keySet().iterator();
-		while( compIt.hasNext() ) {
+		SCALE: while( compIt.hasNext() ) {
 			CompositeScale mvcs = compIt.next();
 			String subVbListString = compositeScales.get(mvcs);
 			String[] subVbList = subVbListString.split(",");
 			for(int i=0; i<subVbList.length; i++) {
 				String subVbId = subVbList[i];
+				Matcher match = patt.matcher(subVbId);
+				if( match.find() || subVbId.length() == 0 ) {
+					continue SCALE;
+				}
 				if( !exVbLookup.containsKey(subVbId) ) {
 					throw new Exception("Can't find "+ subVbId + " in specification of " + 
 								"MultiVariableCompositeScale: " + mvcs.getShortTermId());

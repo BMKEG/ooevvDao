@@ -47,7 +47,7 @@ public class OoEVVSpreadsheetToDatabaseTest {
 			dbUrl = dbUrl.substring(l + 1, dbUrl.length());
 		
 		archiveFile = ctx.getResource(
-				"classpath:edu/isi/bmkeg/ooevv/ooevv_VPDMf.zip").getFile();
+				"classpath:edu/isi/bmkeg/ooevv/ooevv-mysql.zip").getFile();
 		builder = new VPDMfKnowledgeBaseBuilder(archiveFile, 
 				login, password, dbUrl); 
 		
@@ -62,11 +62,7 @@ public class OoEVVSpreadsheetToDatabaseTest {
 		}
 		
 		builder.buildDatabaseFromArchive();
-		
-		radOnc = ctx.getResource("classpath:edu/isi/bmkeg/ooevv/svnStore/radOnc_ooevv.xls").getFile();
-
-		gdiFile = ctx.getResource("classpath:edu/isi/bmkeg/ooevv/svnStore/gdi_ooevv.xls").getFile();
-		
+				
 		tte = ctx.getResource("classpath:edu/isi/bmkeg/ooevv/svnStore/tractTracing_ooevv.xls").getFile();
 
 		//stroke = ctx.getResource("classpath:edu/isi/bmkeg/ooevv/svnStore/stroke_ooevv.xls").getFile();

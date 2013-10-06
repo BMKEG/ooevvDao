@@ -38,8 +38,8 @@ public class OoevvExcelEngineTest {
         
 		ctx = AppContext.getApplicationContext();
 		
-		tteXl = ctx.getResource("classpath:edu/isi/bmkeg/ooevv/OoEVVModel-tractTracingExperiments-02-15-12-1511-gully.xls").getFile();
-		radOnc = ctx.getResource("classpath:edu/isi/bmkeg/ooevv/svnStore/radOnc_ooevv.xls").getFile();
+		//tteXl = ctx.getResource("classpath:edu/isi/bmkeg/ooevv/OoEVVModel-tractTracingExperiments-02-15-12-1511-gully.xls").getFile();
+		//radOnc = ctx.getResource("classpath:edu/isi/bmkeg/ooevv/svnStore/radOnc_ooevv.xls").getFile();
 		
 		xlEngine = new OoevvExcelEngine();
 			

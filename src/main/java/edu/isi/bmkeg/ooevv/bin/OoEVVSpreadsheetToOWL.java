@@ -51,7 +51,7 @@ public class OoEVVSpreadsheetToOWL {
 		OoevvExcelEngine xlEngine = new OoevvExcelEngine();
 
 		String buildFilePath = ClassLoader.getSystemClassLoader()
-				.getResource("edu/isi/bmkeg/ooevv/ooevv_VPDMf.zip").getFile();
+				.getResource("edu/isi/bmkeg/ooevv/ooevv-mysql.zip").getFile();
 		File buildFile = new File(buildFilePath);
 
 		VPDMfKnowledgeBaseBuilder builder = new VPDMfKnowledgeBaseBuilder(
@@ -71,9 +71,9 @@ public class OoEVVSpreadsheetToOWL {
 		OoevvEngineImpl engine = new OoevvEngineImpl();
 		
 		if (!owlFile.exists())
-			engine.saveOoevvSystemAsOwl(owlFile, uri, ".model.");
+			engine.saveOoevvSystemAsOwl(top, owlFile, uri, ".model.");
 
-		engine.saveOoevvElementSetToOwl(exptVbSet, owlFile, uri);
+		engine.saveOoevvElementSetToOwl(top, exptVbSet, owlFile, uri);
 
 	}
 

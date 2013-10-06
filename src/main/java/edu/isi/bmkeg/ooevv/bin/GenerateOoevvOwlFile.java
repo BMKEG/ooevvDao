@@ -27,7 +27,7 @@ public class GenerateOoevvOwlFile {
 		File owlFile = new File(args[0]);
 
 		String buildFilePath = ClassLoader.getSystemClassLoader()
-				.getResource("edu/isi/bmkeg/ooevv/ooevv_VPDMf.zip").getFile();
+				.getResource("edu/isi/bmkeg/ooevv/ooevv-mysql.zip").getFile();
 		File buildFile = new File(buildFilePath);
 
 		VPDMfKnowledgeBaseBuilder builder = new VPDMfKnowledgeBaseBuilder(
@@ -44,7 +44,7 @@ public class GenerateOoevvOwlFile {
 
 		OoevvEngineImpl engine = new OoevvEngineImpl();
 		
-		engine.saveOoevvSystemAsOwl(owlFile, uri, ".model.");
+		engine.saveOoevvSystemAsOwl(top, owlFile, uri, ".model.");
 		
 		
 	}

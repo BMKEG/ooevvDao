@@ -56,6 +56,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 	
 	public OoevvEngineImpl() throws Exception {
 		this.dao = new ExtendedOoevvDaoImpl();
+		this.owlUtil = new OwlAPIUtility();
 	}
 	
 	public OwlAPIUtility getOwlUtil() {
@@ -112,17 +113,19 @@ public class OoevvEngineImpl implements OoevvEngine {
 				AttributeInstance ai = vi.readAttributeInstance(attrAddr, 0);
 				String scaleClassType = ai.readValueString();
 	
-				attrAddr = "]MeasurementScale|MeasurementScale.bmkegId";
+				attrAddr = "]MeasurementScale|MeasurementScale.vpdmfId";
 				ai = vi.readAttributeInstance(attrAddr, 0);
 				String idStr = ai.readValueString();
 	
+				String termAttrAddr = "]Term|MeasurementScale.vpdmfId";
+				
 				if (scaleClassType != null) {
 	
 					// ---------------------------------
 					// query MeasurementScale
 					// ---------------------------------
 					ViewBasedObjectGraph vbog = dao.getVbogs().get(scaleClassType);
-					l = coreDao.goGetHeavyViewList(scaleClassType, attrAddr, idStr);
+					l = coreDao.goGetHeavyViewList(scaleClassType, termAttrAddr, idStr);
 					this.saveViewInstanceToOntology(o, uri, l.get(0));
 	
 				}
@@ -149,7 +152,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// Save data to OWL from Object Graph
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public void saveOoevvElementSetToOwl(OoevvElementSet evs, File owlFile,
+	public void saveOoevvElementSetToOwl(VPDMf top, OoevvElementSet evs, File owlFile,
 			String uri) throws Exception {
 	
 		OWLOntology o = this.getOwlUtil().loadOntology(
@@ -161,7 +164,8 @@ public class OoevvEngineImpl implements OoevvEngine {
 	
 		Set<ViewInstance> exptVbs;
 		
-		ViewBasedObjectGraph vbog = dao.getVbogs().get("OoevvElementSet");
+		ClassLoader cl = OoevvEngineImpl.class.getClassLoader();
+		ViewBasedObjectGraph vbog =	new ViewBasedObjectGraph(top, cl, "OoevvElementSet");
 		ViewInstance vi = vbog.objectGraphToView(evs);
 		this.saveViewInstanceToOntology(o, uri, vi);
 	
@@ -174,7 +178,8 @@ public class OoevvEngineImpl implements OoevvEngine {
 			
 			ExperimentalVariable ev = (ExperimentalVariable) el;
 	
-			vbog = dao.getVbogs().get("ExperimentalVariable");
+			vbog =	new ViewBasedObjectGraph(top, cl, "ExperimentalVariable");
+			
 			vi = vbog.objectGraphToView(ev);
 			this.saveViewInstanceToOntology(o, uri, vi);
 	
@@ -188,7 +193,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 			MeasurementScale ms = ev.getScale();
 	
 			if (scaleClassType != null) {
-				vbog = dao.getVbogs().get(scaleClassType);
+				vbog = new ViewBasedObjectGraph(top, cl, scaleClassType);
 				vi = vbog.objectGraphToView(ms);
 				this.saveViewInstanceToOntology(o, uri, vi);
 			}
@@ -197,7 +202,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 	
 				BinaryScaleWithNamedValues bswnv = (BinaryScaleWithNamedValues) ms;
 	
-				vbog = dao.getVbogs().get("BinaryValue");
+				vbog = new ViewBasedObjectGraph(top, cl, "BinaryValue");
 	
 				vi = vbog.objectGraphToView(bswnv.getTrueValue());
 				this.saveViewInstanceToOntology(o, uri, vi);
@@ -212,7 +217,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 						.iterator();
 				while (tIt.hasNext()) {
 					NominalValue nv = tIt.next();
-					vbog = dao.getVbogs().get("NominalValue");
+					vbog = new ViewBasedObjectGraph(top, cl, "NominalValue");
 					vi = vbog.objectGraphToView(nv);
 					this.saveViewInstanceToOntology(o, uri, vi);
 				}
@@ -224,7 +229,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 						.iterator();
 				while (tIt.hasNext()) {
 					OrdinalValue ov = tIt.next();
-					vbog = dao.getVbogs().get("OrdinalValue");
+					vbog = new ViewBasedObjectGraph(top, cl, "OrdinalValue");
 					vi = vbog.objectGraphToView(ov);
 					this.saveViewInstanceToOntology(o, uri, vi);
 				}
@@ -245,7 +250,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 						.iterator();
 				while (tIt.hasNext()) {
 					HierarchicalValue hv = tIt.next();
-					vbog = dao.getVbogs().get("HierarchicalValue");
+					vbog = new ViewBasedObjectGraph(top, cl, "HierarchicalValue");
 					vi = vbog.objectGraphToView(hv);
 					this.saveViewInstanceToOntology(o, uri, vi);
 				}
@@ -257,7 +262,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 						.iterator();
 				while (tIt.hasNext()) {
 					HierarchicalValue hv = tIt.next();
-					vbog = dao.getVbogs().get("HierarchicalValue");
+					vbog = new ViewBasedObjectGraph(top, cl, "HierarchicalValue");
 					vi = vbog.objectGraphToView(hv);
 					this.saveViewInstanceToOntology(o, uri, vi);
 				}
@@ -273,7 +278,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 				continue;
 			}
 			OoevvProcess p = (OoevvProcess) el;
-			vbog = dao.getVbogs().get("OoevvProcess");
+			vbog = new ViewBasedObjectGraph(top, cl, "OoevvProcess");
 			vi = vbog.objectGraphToView(p);
 			this.saveViewInstanceToOntology(o, uri, vi);
 		}
@@ -285,7 +290,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 				continue;
 			}
 			OoevvEntity e = (OoevvEntity) el;
-			vbog = dao.getVbogs().get("OoevvEntity");
+			vbog = new ViewBasedObjectGraph(top, cl, "OoevvEntity");
 			vi = vbog.objectGraphToView(e);
 			this.saveViewInstanceToOntology(o, uri, vi);
 		}
@@ -294,10 +299,9 @@ public class OoevvEngineImpl implements OoevvEngine {
 	
 	}
 
-	public void saveOoevvSystemAsOwl(File owlFile, String uri, String pkgPattern)
+	public void saveOoevvSystemAsOwl(VPDMf top, File owlFile, String uri, String pkgPattern)
 			throws Exception {
 	
-		VPDMf top = this.dao.getCoreDao().getTop();
 		UMLmodel m = top.getUmlModel();
 	
 		if (owlFile.exists()) {
@@ -532,7 +536,10 @@ public class OoevvEngineImpl implements OoevvEngine {
 	private Map<PrimitiveInstance, Term> buildTermLookupForViewInstance(
 			ViewInstance vi) throws Exception {
 
-		ViewBasedObjectGraph vbog = dao.getVbogs().get(vi.getDefName());
+		VPDMf top = vi.getDefinition().getTop();
+		ClassLoader cl = OoevvEngineImpl.class.getClassLoader();
+		ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(top, cl, vi.getDefName());
+
 		vbog.viewToObjectGraph(vi);
 
 		Map<PrimitiveInstance, Term> tLookup = new HashMap<PrimitiveInstance, Term>();

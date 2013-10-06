@@ -21,7 +21,7 @@ public class GenerateOoEVVDatabase {
 		
 		try { 
 
-			URL url = ClassLoader.getSystemClassLoader().getResource("edu/isi/bmkeg/ooevv/ooevv_VPDMf.zip");
+			URL url = ClassLoader.getSystemClassLoader().getResource("edu/isi/bmkeg/ooevv/ooevv-mysql.zip");
 			String buildFilePath = url.getFile();
 			File buildFile = new File( buildFilePath );
 			VPDMfKnowledgeBaseBuilder builder = new VPDMfKnowledgeBaseBuilder(buildFile, 

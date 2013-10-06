@@ -34,7 +34,7 @@ public class BuildPopulatedOoevvArchive  {
 		
 		OoevvDirToDatabase.main(args1);
 		
-		String archiveFile = ClassLoader.getSystemResource("edu/isi/bmkeg/ooevv/ooevv_VPDMf.zip").getFile();
+		String archiveFile = ClassLoader.getSystemResource("edu/isi/bmkeg/ooevv/ooevv-mysql.zip").getFile();
 
 		String[] args2 = new String[] { 
 				archiveFile, dbName, dbLogin, dbPassword, archive

@@ -62,7 +62,7 @@ public class OoevvHibernateDBTest {
 			dbName = dbUrl.substring(l + 1, dbUrl.length());
 
 		archiveFile = ctx.getResource(
-				"classpath:edu/isi/bmkeg/ooevv/ooevv_VPDMf.zip").getFile();
+				"classpath:edu/isi/bmkeg/ooevv/ooevv-mysql.zip").getFile();
 
 		owlFile = new File(archiveFile.getParent() + "/ooevv.owl");	
 		
