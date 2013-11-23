@@ -14,7 +14,7 @@
 		<relativePath>../bmkeg-parent</relativePath>
 	</parent>
 
-	<name>Ontology of Experimental Variables Data Access</name>
+	<name>Ontology of Experimental Variables Data Access System</name>
 
 	<build>
 		<plugins>
