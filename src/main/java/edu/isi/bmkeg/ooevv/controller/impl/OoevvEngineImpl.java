@@ -169,9 +169,9 @@ public class OoevvEngineImpl implements OoevvEngine {
 		ViewInstance vi = vbog.objectGraphToView(evs);
 		this.saveViewInstanceToOntology(o, uri, vi);
 	
-		Iterator<OoevvElement> exptVbIt = evs.getElements().iterator();
+		Iterator<Term> exptVbIt = evs.getTerm().iterator();
 		while (exptVbIt.hasNext()) {
-			OoevvElement el = exptVbIt.next();
+			OoevvElement el = (OoevvElement) exptVbIt.next();
 			if( !(el instanceof ExperimentalVariable) ) {
 				continue;
 			}
@@ -271,9 +271,9 @@ public class OoevvEngineImpl implements OoevvEngine {
 	
 		}
 	
-		Iterator<OoevvElement> procIt = evs.getElements().iterator();
+		Iterator<Term> procIt = evs.getTerm().iterator();
 		while (procIt.hasNext()) {
-			OoevvElement el = procIt.next();
+			OoevvElement el = (OoevvElement) procIt.next();
 			if( !(el instanceof OoevvProcess) ) {
 				continue;
 			}
@@ -283,9 +283,9 @@ public class OoevvEngineImpl implements OoevvEngine {
 			this.saveViewInstanceToOntology(o, uri, vi);
 		}
 	
-		Iterator<OoevvElement> entIt = evs.getElements().iterator();
+		Iterator<Term> entIt = evs.getTerm().iterator();
 		while (entIt.hasNext()) {
-			OoevvElement el = entIt.next();
+			OoevvElement el = (OoevvElement) entIt.next();
 			if( !(el instanceof OoevvEntity) ) {
 				continue;
 			}

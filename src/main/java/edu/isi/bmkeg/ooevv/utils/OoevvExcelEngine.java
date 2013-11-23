@@ -149,12 +149,12 @@ public class OoevvExcelEngine extends ExcelEngine {
 		r = s.createRow(2);
 		c = r.createCell((short) 0);
 		c.setCellStyle(getCs());
-		c.setCellValue("resource");
+		c.setCellValue("prefix");
 
 		r = s.createRow(3);
 		c = r.createCell((short) 0);
 		c.setCellStyle(getCs());
-		c.setCellValue("url");
+		c.setCellValue("namespace");
 
 		// ____________________________________________
 		// Variables
@@ -420,7 +420,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 		c.setCellValue("name");
 
 		c = r.createCell((short) 1);
-		c.setCellValue(exptVbSet.getTermValue());
+		c.setCellValue(exptVbSet.getDisplayName());
 
 		r = s.createRow(1);
 		c = r.createCell((short) 0);
@@ -428,8 +428,20 @@ public class OoevvExcelEngine extends ExcelEngine {
 		c.setCellValue("description");
 
 		c = r.createCell((short) 1);
-		c.setCellValue(exptVbSet.getDefinition());
+		c.setCellValue(exptVbSet.getDescription());
 
+		r = s.createRow(2);
+		c = r.createCell((short) 0);
+		c.setCellStyle(getCs());
+		c.setCellValue("prefix");
+
+		r = s.createRow(1);
+		c = r.createCell((short) 0);
+		c.setCellStyle(getCs());
+		c.setCellValue("namespace");
+
+		
+		
 		// ____________________________________________
 		// Variables
 		//
@@ -960,8 +972,6 @@ public class OoevvExcelEngine extends ExcelEngine {
 	public OoevvElementSet createExpVariableSetFromExcel(boolean includeLookup)
 				throws Exception {
 
-		Ontology ooevv = this.buildOoEVV();
-
 		this.exptVbSet = new OoevvElementSet();
 		Map<CompositeScale, String> compositeScales = new HashMap<CompositeScale, String>();
 		Map<String, ExperimentalVariable> exVbLookup = new HashMap<String, ExperimentalVariable>();
@@ -976,13 +986,16 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 		String name = this.getData(0, 1, sSheet);
 		String desc = this.getData(1, 1, sSheet);
+		String prefix = this.getData(2, 1, sSheet);
+		String namespace = this.getData(3, 1, sSheet);
 
 		String shortId = name.replaceAll("\\s+", "-").toLowerCase();
 
-		this.exptVbSet.setTermValue(name);
-		this.exptVbSet.setShortTermId(shortId);
-		this.exptVbSet.setDefinition(desc);
-		this.exptVbSet.setOntology(ooevv);
+		this.exptVbSet.setDisplayName(name);
+		this.exptVbSet.setShortName(prefix);
+		this.exptVbSet.setDescription(desc);
+		this.exptVbSet.setNs(namespace);
+		
 		this.exptVbSet.setXlsFile(this.fileBlob);
 		if( this.fileName == null || this.fileName.length() == 0) {
 			this.fileName = name + "_ooevv.xls";
@@ -1084,7 +1097,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 			mv.setTermValue(val);
 			mv.setShortTermId(vid);
 			mv.setDefinition(def);
-			mv.setOntology(ooevv);
+			mv.setOntology(this.exptVbSet);
 
 			if (ontIdStr.length() > 0 && includeLookup) {
 
@@ -1348,7 +1361,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 			ms.setTermValue(sName);
 			ms.setShortTermId(sid);
 			ms.setDefinition(sDef);
-			ms.setOntology(ooevv);
+			ms.setOntology(this.exptVbSet);
 
 			scales.put(sid, ms);
 
@@ -1448,7 +1461,6 @@ public class OoevvExcelEngine extends ExcelEngine {
 			v.setTermValue(vName);
 			v.setShortTermId(vid);
 			v.setDefinition(vDef);
-			v.setOntology(ooevv);
 			v.setMeasures(measures);
 
 			if (vScaleName.length() != 0 && !vScaleName.equals("-")) {
@@ -1459,8 +1471,8 @@ public class OoevvExcelEngine extends ExcelEngine {
 				v.setScale(ms);
 			}
 
-			v.getSets().add(this.exptVbSet);
-			this.exptVbSet.getElements().add(v);
+			v.setOntology(this.exptVbSet);
+			this.exptVbSet.getTerm().add(v);
 			
 			exVbLookup.put(v.getShortTermId(), v);
 
@@ -1551,12 +1563,11 @@ public class OoevvExcelEngine extends ExcelEngine {
 			v.setTermValue(vName);
 			v.setShortTermId(vid);
 			v.setDefinition(vDef);
-			v.setOntology(ooevv);
 
 			v.setObiTerm(obi);
 			
-			v.getSets().add(this.exptVbSet);
-			this.exptVbSet.getElements().add(v);
+			v.setOntology(this.exptVbSet);
+			this.exptVbSet.getTerm().add(v);
 
 		}
 
@@ -1643,11 +1654,10 @@ public class OoevvExcelEngine extends ExcelEngine {
 			e.setTermValue(vName);
 			e.setShortTermId(vid);
 			e.setDefinition(vDef);
-			e.setOntology(ooevv);
+			e.setOntology(this.exptVbSet);
 			e.setObiTerm(obi);
 			
-			e.getSets().add(this.exptVbSet);
-			this.exptVbSet.getElements().add(e);
+			this.exptVbSet.getTerm().add(e);
 
 		}
 		

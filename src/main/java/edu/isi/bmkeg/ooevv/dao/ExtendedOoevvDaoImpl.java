@@ -125,9 +125,9 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		Set<OoevvProcess> procs = new HashSet<OoevvProcess>();
 
-		Iterator<OoevvElement> procIt = exptVbSet.getElements().iterator();
+		Iterator<Term> procIt = exptVbSet.getTerm().iterator();
 		while (procIt.hasNext()) {
-			OoevvElement el = procIt.next();
+			OoevvElement el = (OoevvElement) procIt.next();
 			if( el instanceof OoevvProcess ) {				
 				OoevvProcess proc = (OoevvProcess) el;
 				procs.add(proc);
@@ -144,9 +144,9 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		Set<OoevvEntity> entities = new HashSet<OoevvEntity>();
 
-		Iterator<OoevvElement> entityIt = exptVbSet.getElements().iterator();
+		Iterator<Term> entityIt = exptVbSet.getTerm().iterator();
 		while (entityIt.hasNext()) {
-			OoevvElement el = entityIt.next();
+			OoevvElement el = (OoevvElement) entityIt.next();
 			if( el instanceof OoevvEntity ) {	
 				OoevvEntity entity = (OoevvEntity) el;	
 				entities.add(entity);
@@ -161,9 +161,9 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		Set<ExperimentalVariable> exptVbs = new HashSet<ExperimentalVariable>();
 
-		Iterator<OoevvElement> exptVbIt = exptVbSet.getElements().iterator();
+		Iterator<Term> exptVbIt = exptVbSet.getTerm().iterator();
 		while (exptVbIt.hasNext()) {
-			OoevvElement el = exptVbIt.next();
+			OoevvElement el = (OoevvElement) exptVbIt.next();
 			if( el instanceof ExperimentalVariable ) {	
 				ExperimentalVariable exptVb = (ExperimentalVariable) el;
 				exptVbs.add(exptVb);
@@ -178,9 +178,9 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		Set<MeasurementScale> scales = new HashSet<MeasurementScale>();
 
-		Iterator<OoevvElement> exptVbIt = exptVbSet.getElements().iterator();
+		Iterator<Term> exptVbIt = exptVbSet.getTerm().iterator();
 		while (exptVbIt.hasNext()) {
-			OoevvElement el = exptVbIt.next();
+			OoevvElement el = (OoevvElement) exptVbIt.next();
 			if( el instanceof ExperimentalVariable ) {	
 				ExperimentalVariable exptVb = (ExperimentalVariable) el;
 				if (exptVb.getScale() != null) {
@@ -200,9 +200,9 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 		// explore the data and list all the objects in an accessible way.
 		Set<MeasurementValue> values = new HashSet<MeasurementValue>();
 
-		Iterator<OoevvElement> exptVbIt = exptVbSet.getElements().iterator();
+		Iterator<Term> exptVbIt = exptVbSet.getTerm().iterator();
 		while (exptVbIt.hasNext()) {
-			OoevvElement el = exptVbIt.next();
+			OoevvElement el = (OoevvElement) exptVbIt.next();
 			if( !(el instanceof ExperimentalVariable) ) {
 				continue;
 			}
@@ -264,11 +264,14 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 		// explore the data and list all the objects in an accessible way.
 		Set<Term> terms = new HashSet<Term>();
 
-		terms.add(exptVbSet);
+		// We've made each OoevvElementSet an Ontology rather than a term
+		// TODO: NEED TO ADD EQUIVALENT LISTING OF ONTOLOGIES
+		//terms.add(exptVbSet);
 
-		Iterator<OoevvElement> exptVbIt = exptVbSet.getElements().iterator();
+		Iterator<Term> exptVbIt = exptVbSet.getTerm().iterator();
 		while (exptVbIt.hasNext()) {
-			OoevvElement el = exptVbIt.next();
+			//
+			OoevvElement el = (OoevvElement) exptVbIt.next();
 			if( !(el instanceof ExperimentalVariable) ) {
 				continue;
 			}
@@ -335,9 +338,9 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		}
 
-		Iterator<OoevvElement> procIt = exptVbSet.getElements().iterator();
+		Iterator<Term> procIt = exptVbSet.getTerm().iterator();
 		while (procIt.hasNext()) {
-			OoevvElement el = procIt.next();
+			OoevvElement el = (OoevvElement) procIt.next();
 			if( !(el instanceof OoevvProcess) ) {
 				continue;
 			}
@@ -349,9 +352,9 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			}
 		}
 
-		Iterator<OoevvElement> entIt = exptVbSet.getElements().iterator();
+		Iterator<Term> entIt = exptVbSet.getTerm().iterator();
 		while (entIt.hasNext()) {
-			OoevvElement el = entIt.next();
+			OoevvElement el = (OoevvElement) entIt.next();
 			if( !(el instanceof OoevvEntity) ) {
 				continue;
 			}
@@ -390,25 +393,22 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			coreDao.getCe().connectToDB();
 			coreDao.getCe().turnOffAutoCommit();
 
-
 			//
-			// 1. insert the OoeVV ontology if it's not there.
+			// 1. insert the OoevvElementSet as a view
 			//
-			ViewBasedObjectGraph vbog2 = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "Ontology");
-			Term t = terms.iterator().next();
-			Ontology ont = t.getOntology();
-			
-			ViewInstance vi2 = vbog2.objectGraphToView(ont);
-			Map<String, Object> objMap2 = vbog2.getObjMap();
-			coreDao.getCe().executeInsertQuery(vi2);
+			ViewBasedObjectGraph vbog1 = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "OoevvElementSet");
+			ViewInstance vi1 = vbog1.objectGraphToView(exptVbSet);
+			Map<String, Object> objMap1 = vbog1.getObjMap();
 
-			Iterator<String> keyIt2 = objMap2.keySet().iterator();
-			while (keyIt2.hasNext()) {
-				String key = keyIt2.next();
-				PrimitiveInstance pi = (PrimitiveInstance) vi2.getSubGraph()
+			coreDao.getCe().executeInsertQuery(vi1);
+
+			Iterator<String> keyIt1 = objMap1.keySet().iterator();
+			while (keyIt1.hasNext()) {
+				String key = keyIt1.next();
+				PrimitiveInstance pi = (PrimitiveInstance) vi1.getSubGraph()
 						.getNodes().get(key);
-				Object o = objMap2.get(key);
-				vbog2.primitiveToObject(pi, o, true);
+				Object o = objMap1.get(key);
+				vbog1.primitiveToObject(pi, o, true);
 			}
 			
 			//
@@ -666,24 +666,6 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				}
 
 			}
-
-			//
-			// 6. insert the OoevvElementSet as a view
-			//
-			ViewBasedObjectGraph vbog1 = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "OoevvElementSet");
-			ViewInstance vi1 = vbog1.objectGraphToView(exptVbSet);
-			Map<String, Object> objMap1 = vbog1.getObjMap();
-
-			coreDao.getCe().executeInsertQuery(vi1);
-
-			Iterator<String> keyIt1 = objMap1.keySet().iterator();
-			while (keyIt1.hasNext()) {
-				String key = keyIt1.next();
-				PrimitiveInstance pi = (PrimitiveInstance) vi1.getSubGraph()
-						.getNodes().get(key);
-				Object o = objMap1.get(key);
-				vbog1.primitiveToObject(pi, o, true);
-			}
 			
 			coreDao.getCe().commitTransaction();
 
@@ -796,5 +778,116 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 		return oa;
 
 	}
+	
+	/**
+	 * Removes All Ooevv data completely from the database, rolls back if there are any failures
+	 * @throws Exception
+	 */
+	public void removeOoevv()
+			throws Exception {
+
+		coreDao.getCe().connectToDB();
+		try {
+
+			coreDao.getCe().connectToDB();
+			coreDao.getCe().turnOffAutoCommit();
+
+			//
+			// REMOVE ALL OOEVV DATA FROM DATABASE
+			//
+			String[] tables = new String[] {
+					
+					//
+					// linking tables
+					//
+					"NominalScaleWithAllowedTerms_nScales__nominalValues_NominalValue",
+					"RelativeValue_sourceValue__valueMappings_RelativeValueMapping",
+					"OoevvElement_elements__sets_OoevvElementSet",
+					"OrdinalScaleWithNamedRanks_oScales__ordinalValues_OrdinalValue",
+					"RelativeTermScale_relativeScales__allowedRelations_Term",
+					"RelativeValue_sourceValue__valueMappings_RelativeValueMapping",
+					"HierarchicalScale_hScales__hierarchicalValues_HierarchicalValue",
+					"CompositeScale_partOf__hasParts_ExperimentalVariable",
+
+					//
+					// Variables 
+					//
+					"ExperimentalVariable",
+					
+					//
+					// Scale tables 
+					//
+					"TimeStampScale", 
+					"DecimalScale", 
+					"IntegerScale",
+					"NumericScale",
+					"BinaryScaleWithNamedValues",
+					"BinaryScale",
+					"HierarchicalScale",
+					"NominalScaleWithAllowedTerms",
+					"NominalScale",
+					"OrdinalScaleWithNamedRanks",
+					"OrdinalScaleWithMaxRank",
+					"OrdinalScale",
+					"CompositeScale",
+					"FileScale",
+					"NaturalLanguageScale",
+					"RelativeTermScale",
+					"MeasurementScale",
+
+					//
+					// Value tables 
+					//
+					"HierarchicalValue",
+					"DecimalValue", 
+					"IntegerValue", 
+					"NumericValue",
+					"OrdinalValue",
+					"NominalValue",
+					"BinaryValue",
+					"MeasurementValue",
+
+					//
+					// Elements 
+					//
+					"OoevvProcess",
+					"OoevvEntity",
+					"OoevvElement",
+					"OoevvElementSet",
+					
+					
+					//
+					// Elements 
+					//
+					"Term"					
+			};
+			
+			for( int i=0; i<tables.length; i++) {
+				
+				String sql = "DELETE FROM " + tables[i];
+				int nRowsChanged = this.getCoreDao().getCe().executeRawUpdateQuery(sql);				
+			
+			}
+		
+			String sql = "DELETE FROM ViewTable WHERE viewType LIKE '.Term.%'";
+			int nRowsChanged = this.getCoreDao().getCe().executeRawUpdateQuery(sql);				
+			
+			coreDao.getCe().commitTransaction();
+			
+		} catch (Exception e) {
+
+			coreDao.getCe().rollbackTransaction();
+			e.printStackTrace();
+			throw e;
+
+		} finally {
+
+			coreDao.getCe().closeDbConnection();
+
+		}
+		
+	}
+
+	
 
 }

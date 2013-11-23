@@ -16,7 +16,7 @@ public class OoEVVSpreadsheetToDatabase {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		if( args.length != 4 && args.length != 5) {
 			System.err.println(USAGE);
@@ -32,27 +32,20 @@ public class OoEVVSpreadsheetToDatabase {
 
 		OoevvExcelEngine xlEngine = new OoevvExcelEngine();
 
-		try { 
+		ApplicationContext ctx = AppContext.getApplicationContext();
 
-			ApplicationContext ctx = AppContext.getApplicationContext();
+		ExtendedOoevvDaoImpl dao = new ExtendedOoevvDaoImpl();
+		dao.init(args[2], args[3], args[1]);
 
-			ExtendedOoevvDaoImpl dao = new ExtendedOoevvDaoImpl();
-			dao.init(args[2], args[3], args[1]);
-
-			boolean lookup = false; 
-			if( args.length == 5 )
-				lookup = true;
-			
-			OoevvElementSet exptVbSet = xlEngine
-					.createExpVariableSetFromExcel(ooevvSheet, lookup);
-
-			dao.insertOoevvElementSetInDatabase(exptVbSet);
-						
-		} catch (Exception e) {
-			
-			e.printStackTrace();
+		boolean lookup = false; 
+		if( args.length == 5 )
+			lookup = true;
 		
-		}
+		OoevvElementSet exptVbSet = xlEngine
+				.createExpVariableSetFromExcel(ooevvSheet, lookup);
+
+		dao.insertOoevvElementSetInDatabase(exptVbSet);
+						
 		
 	}
 	
