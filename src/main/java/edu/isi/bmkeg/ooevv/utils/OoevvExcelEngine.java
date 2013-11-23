@@ -633,7 +633,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				NominalScaleWithAllowedTerms bswnv = (NominalScaleWithAllowedTerms) sc;
 
-				Iterator<NominalValue> idIt = bswnv.getNominalValues()
+				Iterator<NominalValue> idIt = bswnv.getNValues()
 						.iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
@@ -648,7 +648,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				OrdinalScaleWithNamedRanks oswnr = (OrdinalScaleWithNamedRanks) sc;
 
-				Iterator<OrdinalValue> idIt = oswnr.getOrdinalValues()
+				Iterator<OrdinalValue> idIt = oswnr.getOValues()
 						.iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
@@ -677,7 +677,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				HierarchicalScale hts = (HierarchicalScale) sc;
 
-				Iterator<HierarchicalValue> idIt = hts.getHierarchicalValues()
+				Iterator<HierarchicalValue> idIt = hts.getHValues()
 						.iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
@@ -1256,7 +1256,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 					String id = idIt.next();
 					NominalValue av = (NominalValue) values.get(id);
 					if (av != null)
-						bswnv.getNominalValues().add(av);
+						bswnv.getNValues().add(av);
 				}
 
 			} else if (sType.equals("OrdinalScale")) {
@@ -1287,7 +1287,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 					String id = idIt.next();
 					OrdinalValue av = (OrdinalValue) values.get(id);
 					if (av != null) {
-						oswnr.getOrdinalValues().add(av);
+						oswnr.getOValues().add(av);
 						av.setRank(r);
 						r++;
 					}
@@ -1318,7 +1318,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 					String id = idIt.next();
 					HierarchicalValue av = (HierarchicalValue) values.get(id);
 					if (av != null)
-						hts.getHierarchicalValues().add(av);
+						hts.getHValues().add(av);
 				}
 
 			} else if (sType.equals("CompositeScale")) {

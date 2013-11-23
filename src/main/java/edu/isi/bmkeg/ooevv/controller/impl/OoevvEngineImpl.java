@@ -213,7 +213,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 			} else if (ms instanceof NominalScaleWithAllowedTerms) {
 	
 				NominalScaleWithAllowedTerms nswat = (NominalScaleWithAllowedTerms) ms;
-				Iterator<NominalValue> tIt = nswat.getNominalValues()
+				Iterator<NominalValue> tIt = nswat.getNValues()
 						.iterator();
 				while (tIt.hasNext()) {
 					NominalValue nv = tIt.next();
@@ -225,7 +225,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 			} else if (ms instanceof OrdinalScaleWithNamedRanks) {
 	
 				OrdinalScaleWithNamedRanks pswnr = (OrdinalScaleWithNamedRanks) ms;
-				Iterator<OrdinalValue> tIt = pswnr.getOrdinalValues()
+				Iterator<OrdinalValue> tIt = pswnr.getOValues()
 						.iterator();
 				while (tIt.hasNext()) {
 					OrdinalValue ov = tIt.next();
@@ -246,7 +246,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 			} else if (ms instanceof HierarchicalScale) {
 	
 				HierarchicalScale hts = (HierarchicalScale) ms;
-				Iterator<HierarchicalValue> tIt = hts.getHierarchicalValues()
+				Iterator<HierarchicalValue> tIt = hts.getHValues()
 						.iterator();
 				while (tIt.hasNext()) {
 					HierarchicalValue hv = tIt.next();
@@ -258,7 +258,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 			} else if (ms instanceof HierarchicalScale) {
 	
 				HierarchicalScale hts = (HierarchicalScale) ms;
-				Iterator<HierarchicalValue> tIt = hts.getHierarchicalValues()
+				Iterator<HierarchicalValue> tIt = hts.getHValues()
 						.iterator();
 				while (tIt.hasNext()) {
 					HierarchicalValue hv = tIt.next();
