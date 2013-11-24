@@ -30,7 +30,6 @@ import edu.isi.bmkeg.ooevv.model.value.HierarchicalValue;
 import edu.isi.bmkeg.ooevv.model.value.MeasurementValue;
 import edu.isi.bmkeg.ooevv.model.value.NominalValue;
 import edu.isi.bmkeg.ooevv.model.value.OrdinalValue;
-import edu.isi.bmkeg.terminology.model.Ontology;
 import edu.isi.bmkeg.terminology.model.Term;
 import edu.isi.bmkeg.utils.superGraph.SuperGraphNode;
 import edu.isi.bmkeg.vpdmf.dao.CoreDao;
@@ -222,7 +221,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				} else if (ms instanceof NominalScaleWithAllowedTerms) {
 
 					NominalScaleWithAllowedTerms nswat = (NominalScaleWithAllowedTerms) ms;
-					Iterator<NominalValue> tIt = nswat.getNValues()
+					Iterator<NominalValue> tIt = nswat.getNVal()
 							.iterator();
 					while (tIt.hasNext()) {
 						NominalValue nv = tIt.next();
@@ -232,7 +231,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				} else if (ms instanceof OrdinalScaleWithNamedRanks) {
 
 					OrdinalScaleWithNamedRanks pswnr = (OrdinalScaleWithNamedRanks) ms;
-					Iterator<OrdinalValue> tIt = pswnr.getOValues()
+					Iterator<OrdinalValue> tIt = pswnr.getOVal()
 							.iterator();
 					while (tIt.hasNext()) {
 						OrdinalValue ov = tIt.next();
@@ -297,7 +296,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				} else if (ms instanceof NominalScaleWithAllowedTerms) {
 
 					NominalScaleWithAllowedTerms nswat = (NominalScaleWithAllowedTerms) ms;
-					Iterator<NominalValue> tIt = nswat.getNValues()
+					Iterator<NominalValue> tIt = nswat.getNVal()
 							.iterator();
 					while (tIt.hasNext()) {
 						NominalValue nv = tIt.next();
@@ -307,7 +306,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				} else if (ms instanceof OrdinalScaleWithNamedRanks) {
 
 					OrdinalScaleWithNamedRanks pswnr = (OrdinalScaleWithNamedRanks) ms;
-					Iterator<OrdinalValue> tIt = pswnr.getOValues()
+					Iterator<OrdinalValue> tIt = pswnr.getOVal()
 							.iterator();
 					while (tIt.hasNext()) {
 						OrdinalValue ov = tIt.next();
@@ -317,7 +316,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				} else if (ms instanceof RelativeTermScale) {
 
 					RelativeTermScale rts = (RelativeTermScale) ms;
-					Iterator<Term> tIt = rts.getAllowedRelations().iterator();
+					Iterator<Term> tIt = rts.getAllowReln().iterator();
 					while (tIt.hasNext()) {
 						terms.add(tIt.next());
 					}

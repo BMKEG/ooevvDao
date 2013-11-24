@@ -213,7 +213,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 			} else if (ms instanceof NominalScaleWithAllowedTerms) {
 	
 				NominalScaleWithAllowedTerms nswat = (NominalScaleWithAllowedTerms) ms;
-				Iterator<NominalValue> tIt = nswat.getNValues()
+				Iterator<NominalValue> tIt = nswat.getNVal()
 						.iterator();
 				while (tIt.hasNext()) {
 					NominalValue nv = tIt.next();
@@ -225,7 +225,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 			} else if (ms instanceof OrdinalScaleWithNamedRanks) {
 	
 				OrdinalScaleWithNamedRanks pswnr = (OrdinalScaleWithNamedRanks) ms;
-				Iterator<OrdinalValue> tIt = pswnr.getOValues()
+				Iterator<OrdinalValue> tIt = pswnr.getOVal()
 						.iterator();
 				while (tIt.hasNext()) {
 					OrdinalValue ov = tIt.next();

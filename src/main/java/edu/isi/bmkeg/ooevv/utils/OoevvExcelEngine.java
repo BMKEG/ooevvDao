@@ -633,7 +633,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				NominalScaleWithAllowedTerms bswnv = (NominalScaleWithAllowedTerms) sc;
 
-				Iterator<NominalValue> idIt = bswnv.getNValues()
+				Iterator<NominalValue> idIt = bswnv.getNVal()
 						.iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
@@ -648,7 +648,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				OrdinalScaleWithNamedRanks oswnr = (OrdinalScaleWithNamedRanks) sc;
 
-				Iterator<OrdinalValue> idIt = oswnr.getOValues()
+				Iterator<OrdinalValue> idIt = oswnr.getOVal()
 						.iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
@@ -663,7 +663,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				RelativeTermScale rts = (RelativeTermScale) sc;
 
-				Iterator<Term> idIt = rts.getAllowedRelations().iterator();
+				Iterator<Term> idIt = rts.getAllowReln().iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
 					Term av = idIt.next();
@@ -1256,7 +1256,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 					String id = idIt.next();
 					NominalValue av = (NominalValue) values.get(id);
 					if (av != null)
-						bswnv.getNValues().add(av);
+						bswnv.getNVal().add(av);
 				}
 
 			} else if (sType.equals("OrdinalScale")) {
@@ -1287,7 +1287,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 					String id = idIt.next();
 					OrdinalValue av = (OrdinalValue) values.get(id);
 					if (av != null) {
-						oswnr.getOValues().add(av);
+						oswnr.getOVal().add(av);
 						av.setRank(r);
 						r++;
 					}

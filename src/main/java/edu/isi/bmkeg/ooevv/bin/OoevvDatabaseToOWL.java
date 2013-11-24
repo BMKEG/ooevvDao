@@ -3,7 +3,6 @@ package edu.isi.bmkeg.ooevv.bin;
 import java.io.File;
 
 import edu.isi.bmkeg.ooevv.controller.impl.OoevvEngineImpl;
-import edu.isi.bmkeg.ooevv.dao.ExtendedOoevvDaoImpl;
 import edu.isi.bmkeg.uml.interfaces.OwlUmlInterface;
 import edu.isi.bmkeg.uml.model.UMLmodel;
 import edu.isi.bmkeg.vpdmf.model.definitions.VPDMf;
