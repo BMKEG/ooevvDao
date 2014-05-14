@@ -32,7 +32,7 @@ public class OoevvDaoImplTest {
 
 	ExtendedOoevvDaoImpl dao;
 	
-	String login, password, dbUrl;
+	String login, password, dbUrl, wd;
 	File archiveFile, owlFile, svnDir, tte, vaccine;
 	VPDMfKnowledgeBaseBuilder builder;
 	
@@ -45,6 +45,7 @@ public class OoevvDaoImplTest {
 		login = prop.getDbUser();
 		password = prop.getDbPassword();
 		dbUrl = prop.getDbUrl();
+		wd = prop.getWorkingDirectory();
 		
 		int l = dbUrl.lastIndexOf("/");
 		if (l != -1)
@@ -80,7 +81,7 @@ public class OoevvDaoImplTest {
 		OoEVVSpreadsheetToDatabase.main(args);
 		
 		dao = new ExtendedOoevvDaoImpl();
-		dao.init(login, password, dbUrl);
+		dao.init(login, password, dbUrl, wd);
 		
 	}
 

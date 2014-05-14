@@ -23,13 +23,13 @@ public class AdminCoreDao {
 
 		String localHostName = InetAddress.getLocalHost().getHostName();
 		
-		String dbName = BmkegProperties.readDbUrl();
+		String dbName = BmkegProperties.readDbUrl(false);
 		int l = dbName.lastIndexOf("/");
 		if( l != -1 )
 			dbName = dbName.substring(l+1, dbName.length());
 		
-		String login = BmkegProperties.readDbUser();
-		String passwd = BmkegProperties.readDbPassword();
+		String login = BmkegProperties.readDbUser(false);
+		String passwd = BmkegProperties.readDbPassword(false);
 		
 		//
 		// Log on to local system.

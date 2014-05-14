@@ -22,13 +22,11 @@ import edu.isi.bmkeg.vpdmf.controller.VPDMfKnowledgeBaseBuilder;
 public class OoevvDirToDatabaseTest {
 
 	ApplicationContext ctx;
-
-	OoevvSvnToDatabase svnToDb;
 	
 	File excel;
 	String output;
 
-	String dbLogin, dbPassword, dbUrl;
+	String dbLogin, dbPassword, dbUrl, wd;
 	String svnLogin, svnPassword, svnUrl;
 	File svnDir;
 	
@@ -43,6 +41,7 @@ public class OoevvDirToDatabaseTest {
 		dbLogin = prop.getDbUser();
 		dbPassword = prop.getDbPassword();
 		dbUrl = prop.getDbUrl();
+		wd = prop.getWorkingDirectory();
 
 		int l = dbUrl.lastIndexOf("/");
 		if (l != -1)
@@ -80,7 +79,7 @@ public class OoevvDirToDatabaseTest {
 	public final void testRunExecWithFullPaths() throws Exception {
 		
 		String[] args = new String[] { 
-				svnDir.getPath(), dbUrl, dbLogin, dbPassword
+				svnDir.getPath(), dbUrl, dbLogin, dbPassword, wd
 				};
 		
 		OoevvDirToDatabase.main(args);

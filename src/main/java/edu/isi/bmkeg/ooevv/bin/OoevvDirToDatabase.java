@@ -9,7 +9,7 @@ import edu.isi.bmkeg.ooevv.utils.OoevvExcelEngine;
 
 public class OoevvDirToDatabase  {
 
-	public static String USAGE = "arguments: <xl-dir> <db-name> <db-login> <db-dbPassword> [ontology-lookup?]\n";
+	public static String USAGE = "arguments: <xl-dir> <db-name> <db-login> <db-dbPassword> <wd> [ontology-lookup?]\n";
 	
 	private String svnUrl;
 	private String svnLogin;
@@ -18,21 +18,23 @@ public class OoevvDirToDatabase  {
 	private String dbName;
 	private String dbLogin;
 	private String dbPassword;
+	private String wd;
 	private boolean lookupFlag = false;
 			
 	private OoevvExcelEngine xlEngine;
 	private ExtendedOoevvDaoImpl dao;
 	
-	public OoevvDirToDatabase(String dbName, String dbLogin, String dbPassword, boolean lookupFlag) throws Exception{
+	public OoevvDirToDatabase(String dbName, String dbLogin, String dbPassword, String wd, boolean lookupFlag) throws Exception{
 		this.dbName = dbName;
 		this.dbLogin = dbLogin;
 		this.dbPassword = dbPassword;
+		this.wd = wd;
 		this.lookupFlag = lookupFlag;
 		
 		xlEngine = new OoevvExcelEngine();
 
 		dao = new ExtendedOoevvDaoImpl();
-		dao.init(this.dbLogin, this.dbPassword, this.dbName);
+		dao.init(this.dbLogin, this.dbPassword, this.dbName, this.wd);
 		
 	}
 	
@@ -50,14 +52,15 @@ public class OoevvDirToDatabase  {
 		String dbName = args[1];
 		String dbLogin = args[2];
 		String dbPassword = args[3];
+		String wd = args[4];
 		
 		boolean lookupFlag = false;
-		if( args.length == 5 ) {
+		if( args.length == 6 ) {
 			lookupFlag = true;
 		}
 		
 		OoevvDirToDatabase svnToDb = new OoevvDirToDatabase(
-				dbName, dbLogin, dbPassword, lookupFlag
+				dbName, dbLogin, dbPassword, wd, lookupFlag
 				);
 	
 		File localDir = new File(localDirPath);

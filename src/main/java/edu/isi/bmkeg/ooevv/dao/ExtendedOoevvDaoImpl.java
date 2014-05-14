@@ -61,19 +61,16 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 	@Autowired
 	private CoreDao coreDao;
-
-	private Map<String, ViewBasedObjectGraph> vbogs;
 	
 	public ExtendedOoevvDaoImpl() throws Exception {}
 
-	public void init(String login, String password, String uri) throws Exception {
+	public void init(String login, String password, String uri, String wd) throws Exception {
 		
 		if( coreDao == null ) {
 			this.coreDao = new CoreDaoImpl();
 		}
 		
-		this.coreDao.init(login, password, uri);
-		this.vbogs = this.coreDao.generateVbogs();
+		this.coreDao.init(login, password, uri, wd);
 		
 	}
 	
@@ -83,10 +80,6 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 	public void setCoreDao(CoreDao coreDao) {
 		this.coreDao = coreDao;
-	}
-
-	public Map<String, ViewBasedObjectGraph> getVbogs() {
-		return vbogs;
 	}
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -756,7 +749,8 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 		OoevvElementSet evs = new OoevvElementSet();
 		Set<ViewInstance> exptVbs;
 
-		ViewBasedObjectGraph vbog = getVbogs().get("OoevvElementSet");
+		ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(),
+				coreDao.getCl(), "OoevvElementSet");
 
 		coreDao.getCe().connectToDB();
 		ViewInstance vi = coreDao.getCe().executeUIDQuery("OoevvElementSet", uid);

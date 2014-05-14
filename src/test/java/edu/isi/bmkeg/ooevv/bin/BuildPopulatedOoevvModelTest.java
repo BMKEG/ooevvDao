@@ -23,7 +23,7 @@ public class BuildPopulatedOoevvModelTest {
 
 	OoevvDatabaseToOWL p;
 	
-	String login, password, dbUrl;
+	String login, password, dbUrl, wd;
 	File archiveFile, newArchive, svnDir;
 	VPDMfKnowledgeBaseBuilder builder;
 	

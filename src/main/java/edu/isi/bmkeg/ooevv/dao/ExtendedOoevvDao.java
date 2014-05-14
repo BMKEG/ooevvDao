@@ -13,10 +13,8 @@ import edu.isi.bmkeg.vpdmf.model.instances.ViewBasedObjectGraph;
 public interface ExtendedOoevvDao {	
 	
 	public CoreDao getCoreDao();
-
-	public Map<String, ViewBasedObjectGraph> getVbogs();	
 	
-	public void init(String login, String password, String uri) throws Exception;
+	public void init(String login, String password, String uri, String wd) throws Exception;
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	

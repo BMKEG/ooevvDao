@@ -115,18 +115,17 @@ public class OoevvEngineImpl implements OoevvEngine {
 	
 				attrAddr = "]MeasurementScale|MeasurementScale.vpdmfId";
 				ai = vi.readAttributeInstance(attrAddr, 0);
-				String idStr = ai.readValueString();
+				Long id = new Long(ai.readValueString());
 	
-				String termAttrAddr = "]Term|MeasurementScale.vpdmfId";
-				
 				if (scaleClassType != null) {
 	
 					// ---------------------------------
 					// query MeasurementScale
 					// ---------------------------------
-					ViewBasedObjectGraph vbog = dao.getVbogs().get(scaleClassType);
-					l = coreDao.goGetHeavyViewList(scaleClassType, termAttrAddr, idStr);
-					this.saveViewInstanceToOntology(o, uri, l.get(0));
+					ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(),
+							coreDao.getCl(), scaleClassType);
+					ViewInstance vi2 = coreDao.getCe().executeUIDQuery(scaleClassType, id);
+					this.saveViewInstanceToOntology(o, uri, vi2);
 	
 				}
 	

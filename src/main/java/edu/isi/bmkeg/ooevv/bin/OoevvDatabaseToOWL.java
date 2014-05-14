@@ -9,7 +9,7 @@ import edu.isi.bmkeg.vpdmf.model.definitions.VPDMf;
 
 public class OoevvDatabaseToOWL {
 
-	public static String USAGE = "arguments: <database-name> <login> <dbPassword> <owl-file>\n"; 
+	public static String USAGE = "arguments: <database-name> <login> <dbPassword> <workingDirectory> <owl-file>\n"; 
 	
 	/**
 	 * @param args
@@ -24,7 +24,7 @@ public class OoevvDatabaseToOWL {
 		try { 
 			
 			OoevvEngineImpl engine = new OoevvEngineImpl();
-			engine.getDao().init(args[1], args[2], args[0]);
+			engine.getDao().init(args[1], args[2], args[0], args[3]);
 
 			VPDMf top = engine.getDao().getCoreDao().getTop();
 			
@@ -34,7 +34,7 @@ public class OoevvDatabaseToOWL {
 
 			String uri = "http://bmkeg.isi.edu/ooevv/";
 
-			File owlFile = new File(args[3]);	
+			File owlFile = new File(args[4]);	
 
 			oui.saveUmlAsOwl(owlFile, uri, ".model.");
 			

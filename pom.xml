@@ -143,38 +143,6 @@
 
 	<dependencies>
 
-		<!-- Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>com.springsource.slf4j.api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>com.springsource.slf4j.org.apache.commons.logging</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>com.springsource.slf4j.log4j</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<!-- Hack to fix colliding versions from other dependencies -->
-		<dependency>
-  			<groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-log4j12</artifactId>
-      		<version>${slf4j.version}</version>
-    	</dependency> 
-		<dependency>
-  			<groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-api</artifactId>
-      		<version>${slf4j.version}</version>
-    	</dependency> 
-
-
 		<dependency>
 			<groupId>edu.isi.bmkeg</groupId>
 			<artifactId>vpdmfCore</artifactId>

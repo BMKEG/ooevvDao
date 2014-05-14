@@ -11,7 +11,6 @@ import edu.isi.bmkeg.ooevv.dao.ExtendedOoevvDaoImpl;
 import edu.isi.bmkeg.uml.interfaces.OwlUmlInterface;
 import edu.isi.bmkeg.uml.utils.OwlAPIUtility;
 import edu.isi.bmkeg.vpdmf.controller.VPDMfKnowledgeBaseBuilder;
-import edu.isi.bmkeg.vpdmf.controller.queryEngineTools.VPDMfChangeEngineInterface;
 import edu.isi.bmkeg.vpdmf.model.definitions.VPDMf;
 
 /**
@@ -30,7 +29,6 @@ public class OoevvHibernateDBTest {
 	ApplicationContext ctx;
 
 	VPDMfKnowledgeBaseBuilder builder;
-	VPDMfChangeEngineInterface ce;
 
 	VPDMf top;
 	ClassLoader cl;

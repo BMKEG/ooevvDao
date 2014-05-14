@@ -28,7 +28,7 @@ public class OoEVVSpreadsheetToDatabaseTest {
 	File tte, radOnc, gdiFile, stroke, vaccine;
 	String output;
 
-	String login, password, dbUrl;
+	String login, password, dbUrl, wd;
 	File archiveFile;
 	VPDMfKnowledgeBaseBuilder builder;
 	
@@ -41,6 +41,7 @@ public class OoEVVSpreadsheetToDatabaseTest {
 		login = prop.getDbUser();
 		password = prop.getDbPassword();
 		dbUrl = prop.getDbUrl();
+		wd = prop.getDbUrl();
 
 		int l = dbUrl.lastIndexOf("/");
 		if (l != -1)
@@ -82,7 +83,7 @@ public class OoEVVSpreadsheetToDatabaseTest {
 	public final void testRunExecWithFullPaths_tte() throws Exception {
 		
 		String[] args = new String[] { 
-				tte.getAbsolutePath(), dbUrl, login, password
+				tte.getAbsolutePath(), dbUrl, login, password, wd
 				};
 		
 		OoEVVSpreadsheetToDatabase.main(args);
@@ -94,7 +95,7 @@ public class OoEVVSpreadsheetToDatabaseTest {
 	public final void testRunExecWithFullPaths_vaccine() throws Exception {
 		
 		String[] args = new String[] { 
-				vaccine.getAbsolutePath(), dbUrl, login, password
+				vaccine.getAbsolutePath(), dbUrl, login, password, wd
 				};
 		
 		OoEVVSpreadsheetToDatabase.main(args);
@@ -105,7 +106,7 @@ public class OoEVVSpreadsheetToDatabaseTest {
 /*	public final void testRunExecWithFullPaths_radOnc() throws Exception {
 		
 		String[] args = new String[] { 
-				radOnc.getAbsolutePath(), dbUrl, login, password
+				radOnc.getAbsolutePath(), dbUrl, login, password, wd
 				};
 		
 		OoEVVSpreadsheetToDatabase.main(args);

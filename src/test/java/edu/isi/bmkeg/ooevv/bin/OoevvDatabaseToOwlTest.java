@@ -28,7 +28,7 @@ public class OoevvDatabaseToOwlTest {
 
 	OoevvDatabaseToOWL p;
 	
-	String login, password, dbUrl;
+	String login, password, dbUrl, wd;
 	File archiveFile, owlFile, svnDir, tte, vaccine;
 	VPDMfKnowledgeBaseBuilder builder;
 	
@@ -41,6 +41,7 @@ public class OoevvDatabaseToOwlTest {
 		login = prop.getDbUser();
 		password = prop.getDbPassword();
 		dbUrl = prop.getDbUrl();
+		wd = prop.getWorkingDirectory();
 		
 		int l = dbUrl.lastIndexOf("/");
 		if (l != -1)
@@ -111,12 +112,12 @@ public class OoevvDatabaseToOwlTest {
 	public final void testOnlyTwoExcelSheets() throws Exception {
 				
 		String[] args = new String[] { 
-				vaccine.getAbsolutePath(), dbUrl, login, password
+				vaccine.getAbsolutePath(), dbUrl, login, password, wd 
 				};
 		OoEVVSpreadsheetToDatabase.main(args);
 		
 		args = new String[] { 
-				tte.getAbsolutePath(), dbUrl, login, password
+				tte.getAbsolutePath(), dbUrl, login, password, wd
 				};
 		OoEVVSpreadsheetToDatabase.main(args);
 		

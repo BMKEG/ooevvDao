@@ -9,11 +9,12 @@ import edu.isi.bmkeg.ooevv.utils.OoevvExcelEngine;
 
 public class RemoveOoevvFromDatabase  {
 
-	public static String USAGE = "arguments: <db-name> <db-login> <db-dbPassword>\n";
+	public static String USAGE = "arguments: <db-name> <db-login> <db-dbPassword> <wd>\n";
 	
 	private String dbName;
 	private String dbLogin;
 	private String dbPassword;
+	private String wd;
 	private boolean lookupFlag = false;
 			
 	private OoevvExcelEngine xlEngine;
@@ -27,7 +28,7 @@ public class RemoveOoevvFromDatabase  {
 		xlEngine = new OoevvExcelEngine();
 
 		dao = new ExtendedOoevvDaoImpl();
-		dao.init(this.dbLogin, this.dbPassword, this.dbName);
+		dao.init(this.dbLogin, this.dbPassword, this.dbName, this.wd);
 		
 	}
 	
@@ -36,7 +37,7 @@ public class RemoveOoevvFromDatabase  {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		if ( args.length != 3 ) {
+		if ( args.length != 4 ) {
 			System.err.println(USAGE);
 			System.exit(-1);
 		}
@@ -44,9 +45,10 @@ public class RemoveOoevvFromDatabase  {
 		String dbName = args[0];
 		String dbLogin = args[1];
 		String dbPassword = args[2];
+		String wd = args[3];
 				
 		ExtendedOoevvDaoImpl dao = new ExtendedOoevvDaoImpl();
-		dao.init(dbLogin, dbPassword, dbName);
+		dao.init(dbLogin, dbPassword, dbName, wd);
 		
 		dao.removeOoevv();
 		
