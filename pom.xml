@@ -151,7 +151,7 @@
 
 		<dependency>
 			<groupId>edu.isi.bmkeg</groupId>
-			<artifactId>ooevv</artifactId>
+			<artifactId>vpdmf-ooevv</artifactId>
 			<classifier>mysql</classifier>
 			<type>zip</type>
 			<exclusions>
@@ -164,13 +164,13 @@
 
 		<dependency>
 			<groupId>edu.isi.bmkeg</groupId>
-			<artifactId>ooevv-jpa</artifactId>
+			<artifactId>vpdmf-ooevv-jpa</artifactId>
 			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>edu.isi.bmkeg</groupId>
-			<artifactId>ooevv-services</artifactId>
+			<artifactId>vpdmf-ooevv-services</artifactId>
 			<type>jar</type>
 		</dependency>
 
