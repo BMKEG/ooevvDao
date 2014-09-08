@@ -29,6 +29,7 @@ import edu.isi.bmkeg.ooevv.model.ExperimentalVariable;
 import edu.isi.bmkeg.ooevv.model.OoevvElementSet;
 import edu.isi.bmkeg.ooevv.model.OoevvEntity;
 import edu.isi.bmkeg.ooevv.model.OoevvProcess;
+import edu.isi.bmkeg.ooevv.model.SubVariable;
 import edu.isi.bmkeg.ooevv.model.scale.BinaryScale;
 import edu.isi.bmkeg.ooevv.model.scale.BinaryScaleWithNamedValues;
 import edu.isi.bmkeg.ooevv.model.scale.CompositeScale;
@@ -73,7 +74,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 	private OoevvElementSet exptVbSet;
 
 	private File dataDirectory;
-	
+
 	private byte[] fileBlob;
 	private String fileName;
 
@@ -313,7 +314,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 		c = r.createCell((short) 4);
 		c.setCellStyle(getCs());
 		c.setCellValue("curator");
-		
+
 		// ____________________________________________
 		// Entities
 		//
@@ -345,7 +346,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 		c = r.createCell((short) 4);
 		c.setCellStyle(getCs());
 		c.setCellValue("curator");
-		
+
 		// ____________________________________________
 		// Curators
 		//
@@ -374,23 +375,28 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 	}
 
-	public HSSFWorkbook generateOoevvExcelWorkbook(OoevvElementSet exptVbSet) 
+	public HSSFWorkbook generateOoevvExcelWorkbook(OoevvElementSet exptVbSet)
 			throws Exception {
 
-		Set<ExperimentalVariable> exptVbs = ExtendedOoevvDaoImpl.listExptVbsInObjectGraph(exptVbSet);
-		Set<MeasurementScale> scales = ExtendedOoevvDaoImpl.listScalesInObjectGraph(exptVbSet);
-		Set<OoevvProcess> processes = ExtendedOoevvDaoImpl.listProcessesInObjectGraph(exptVbSet);
-		Set<OoevvEntity> entities = ExtendedOoevvDaoImpl.listEntitiesInObjectGraph(exptVbSet);
-		
-		return this.generateOoevvExcelWorkbook(exptVbs, scales, processes, entities);
-	
+		Set<ExperimentalVariable> exptVbs = ExtendedOoevvDaoImpl
+				.listExptVbsInObjectGraph(exptVbSet);
+		Set<MeasurementScale> scales = ExtendedOoevvDaoImpl
+				.listScalesInObjectGraph(exptVbSet);
+		Set<OoevvProcess> processes = ExtendedOoevvDaoImpl
+				.listProcessesInObjectGraph(exptVbSet);
+		Set<OoevvEntity> entities = ExtendedOoevvDaoImpl
+				.listEntitiesInObjectGraph(exptVbSet);
+
+		return this.generateOoevvExcelWorkbook(exptVbs, scales, processes,
+				entities);
+
 	}
-		
-	public HSSFWorkbook generateOoevvExcelWorkbook(Set<ExperimentalVariable> exptVbs, 
-			Set<MeasurementScale> scales,
-			Set<OoevvProcess> processes,
-			Set<OoevvEntity> entities ) throws Exception {
-		
+
+	public HSSFWorkbook generateOoevvExcelWorkbook(
+			Set<ExperimentalVariable> exptVbs, Set<MeasurementScale> scales,
+			Set<OoevvProcess> processes, Set<OoevvEntity> entities)
+			throws Exception {
+
 		Map<Term, MeasurementValue> values = new HashMap<Term, MeasurementValue>();
 		Set<Person> curators = new HashSet<Person>();
 
@@ -420,7 +426,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 		c.setCellValue("name");
 
 		c = r.createCell((short) 1);
-		c.setCellValue(exptVbSet.getDisplayName());
+		c.setCellValue(exptVbSet.getTermValue());
 
 		r = s.createRow(1);
 		c = r.createCell((short) 0);
@@ -428,7 +434,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 		c.setCellValue("description");
 
 		c = r.createCell((short) 1);
-		c.setCellValue(exptVbSet.getDescription());
+		c.setCellValue(exptVbSet.getDefinition());
 
 		r = s.createRow(2);
 		c = r.createCell((short) 0);
@@ -440,8 +446,6 @@ public class OoevvExcelEngine extends ExcelEngine {
 		c.setCellStyle(getCs());
 		c.setCellValue("namespace");
 
-		
-		
 		// ____________________________________________
 		// Variables
 		//
@@ -513,14 +517,12 @@ public class OoevvExcelEngine extends ExcelEngine {
 			// remove tracking of curator for all terms
 			c = r.createCell((short) 5);
 			String cStr = "";
-			/*Iterator<TerminologyCurator> cIt = vb.getDefinitionEditor()
-					.iterator();
-			while (cIt.hasNext()) {
-				TerminologyCurator cur = cIt.next();
-				cStr += cur.getVpdmfId();
-				if (cIt.hasNext())
-					cStr += ",";
-			}*/
+			/*
+			 * Iterator<TerminologyCurator> cIt = vb.getDefinitionEditor()
+			 * .iterator(); while (cIt.hasNext()) { TerminologyCurator cur =
+			 * cIt.next(); cStr += cur.getVpdmfId(); if (cIt.hasNext()) cStr +=
+			 * ","; }
+			 */
 			c.setCellValue(cStr);
 
 		}
@@ -605,14 +607,11 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 			c = r.createCell((short) 6);
 			String cStr = "";
-			/*Iterator<TerminologyCurator> cIt = sc.getDefinitionEditor()
-					.iterator();
-			while (cIt.hasNext()) {
-				Person cur = cIt.next();
-				cStr += cur.getVpdmfId();
-				if (cIt.hasNext())
-					cStr += ",";
-			}*/
+			/*
+			 * Iterator<TerminologyCurator> cIt = sc.getDefinitionEditor()
+			 * .iterator(); while (cIt.hasNext()) { Person cur = cIt.next();
+			 * cStr += cur.getVpdmfId(); if (cIt.hasNext()) cStr += ","; }
+			 */
 			c.setCellValue(cStr);
 
 			String sType = sc.getClass().getSimpleName();
@@ -626,15 +625,13 @@ public class OoevvExcelEngine extends ExcelEngine {
 				c.setCellValue(bswnv.getFalseValue().getShortTermId());
 
 				values.put(bswnv.getTrueValue(), bswnv.getTrueValue());
-				values.put(bswnv.getFalseValue(),
-						bswnv.getFalseValue());
+				values.put(bswnv.getFalseValue(), bswnv.getFalseValue());
 
 			} else if (sType.equals("NominalScaleWithAllowedTerms")) {
 
 				NominalScaleWithAllowedTerms bswnv = (NominalScaleWithAllowedTerms) sc;
 
-				Iterator<NominalValue> idIt = bswnv.getNVal()
-						.iterator();
+				Iterator<NominalValue> idIt = bswnv.getNVal().iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
 					NominalValue av = idIt.next();
@@ -648,8 +645,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				OrdinalScaleWithNamedRanks oswnr = (OrdinalScaleWithNamedRanks) sc;
 
-				Iterator<OrdinalValue> idIt = oswnr.getOVal()
-						.iterator();
+				Iterator<OrdinalValue> idIt = oswnr.getOVal().iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
 					OrdinalValue av = idIt.next();
@@ -677,8 +673,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				HierarchicalScale hts = (HierarchicalScale) sc;
 
-				Iterator<HierarchicalValue> idIt = hts.getHValues()
-						.iterator();
+				Iterator<HierarchicalValue> idIt = hts.getHValues().iterator();
 				short cc = (short) 6;
 				while (idIt.hasNext()) {
 					HierarchicalValue av = idIt.next();
@@ -749,13 +744,12 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 			c = r.createCell((short) 4);
 			String cStr = "";
-			/*Iterator<TerminologyCurator> cIt = t.getDefinitionEditor().iterator();
-			while (cIt.hasNext()) {
-				TerminologyCurator cur = cIt.next();
-				cStr += cur.getVpdmfId();
-				if (cIt.hasNext())
-					cStr += ",";
-			}*/
+			/*
+			 * Iterator<TerminologyCurator> cIt =
+			 * t.getDefinitionEditor().iterator(); while (cIt.hasNext()) {
+			 * TerminologyCurator cur = cIt.next(); cStr += cur.getVpdmfId(); if
+			 * (cIt.hasNext()) cStr += ","; }
+			 */
 			c.setCellValue(cStr);
 
 		}
@@ -816,13 +810,12 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 			c = r.createCell((short) 5);
 			String cStr = "";
-			/*Iterator<TerminologyCurator> cIt = p.getDefinitionEditor().iterator();
-			while (cIt.hasNext()) {
-				TerminologyCurator cur = cIt.next();
-				cStr += cur.getVpdmfId();
-				if (cIt.hasNext())
-					cStr += ",";
-			}*/
+			/*
+			 * Iterator<TerminologyCurator> cIt =
+			 * p.getDefinitionEditor().iterator(); while (cIt.hasNext()) {
+			 * TerminologyCurator cur = cIt.next(); cStr += cur.getVpdmfId(); if
+			 * (cIt.hasNext()) cStr += ","; }
+			 */
 			c.setCellValue(cStr);
 
 		}
@@ -883,13 +876,12 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 			c = r.createCell((short) 5);
 			String cStr = "";
-			/*Iterator<TerminologyCurator> cIt = e.getDefinitionEditor().iterator();
-			while (cIt.hasNext()) {
-				Person cur = cIt.next();
-				cStr += cur.getVpdmfId();
-				if (cIt.hasNext())
-					cStr += ",";
-			}*/
+			/*
+			 * Iterator<TerminologyCurator> cIt =
+			 * e.getDefinitionEditor().iterator(); while (cIt.hasNext()) {
+			 * Person cur = cIt.next(); cStr += cur.getVpdmfId(); if
+			 * (cIt.hasNext()) cStr += ","; }
+			 */
 			c.setCellValue(cStr);
 
 		}
@@ -926,13 +918,13 @@ public class OoevvExcelEngine extends ExcelEngine {
 			r = s.createRow(rCount);
 
 			c = r.createCell((short) 0);
-			c.setCellValue( cur.getVpdmfId() );
+			c.setCellValue(cur.getVpdmfId());
 
 			c = r.createCell((short) 1);
-			c.setCellValue( cur.getSurname() );
+			c.setCellValue(cur.getSurname());
 
 			c = r.createCell((short) 2);
-			c.setCellValue( cur.getEmail() );
+			c.setCellValue(cur.getEmail());
 
 		}
 
@@ -940,40 +932,40 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 	}
 
-	
 	public OoevvElementSet createExpVariableSetFromExcel(File f)
 			throws Exception {
-		
+
 		return this.createExpVariableSetFromExcel(f, false);
 
 	}
 
-	public OoevvElementSet createExpVariableSetFromExcel(byte[] data, boolean includeLookup)
-			throws Exception {
-		
+	public OoevvElementSet createExpVariableSetFromExcel(byte[] data,
+			boolean includeLookup) throws Exception {
+
 		this.readByteArray(data);
 		this.fileBlob = data;
 
 		return this.createExpVariableSetFromExcel(includeLookup);
-		
+
 	}
-	
-	public OoevvElementSet createExpVariableSetFromExcel(File f, boolean includeLookup)
-			throws Exception {
+
+	public OoevvElementSet createExpVariableSetFromExcel(File f,
+			boolean includeLookup) throws Exception {
 
 		this.readFile(f);
 		this.fileName = f.getName();
 		this.fileBlob = Converters.fileContentsToBytesArray(f);
-		
+
 		return this.createExpVariableSetFromExcel(includeLookup);
-		
+
 	}
-	
+
 	public OoevvElementSet createExpVariableSetFromExcel(boolean includeLookup)
-				throws Exception {
+			throws Exception {
 
 		this.exptVbSet = new OoevvElementSet();
-		Map<CompositeScale, String> compositeScales = new HashMap<CompositeScale, String>();
+		Map<CompositeScale, List<String>> compositeScales = new HashMap<CompositeScale, List<String>>();
+		Set<String> subVariables = new HashSet<String>();
 		Map<String, ExperimentalVariable> exVbLookup = new HashMap<String, ExperimentalVariable>();
 		Map<MeasurementValue, String> valueScaleLookup = new HashMap<MeasurementValue, String>();
 
@@ -991,13 +983,13 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 		String shortId = name.replaceAll("\\s+", "-").toLowerCase();
 
-		this.exptVbSet.setDisplayName(name);
-		this.exptVbSet.setShortName(prefix);
-		this.exptVbSet.setDescription(desc);
-		this.exptVbSet.setNs(namespace);
-		
+		this.exptVbSet.setTermValue(name);
+		this.exptVbSet.setShortTermId(prefix);
+		this.exptVbSet.setDefinition(desc);
+		// this.exptVbSet.setsetNs(namespace);
+
 		this.exptVbSet.setXlsFile(this.fileBlob);
-		if( this.fileName == null || this.fileName.length() == 0) {
+		if (this.fileName == null || this.fileName.length() == 0) {
 			this.fileName = name + "_ooevv.xls";
 		}
 		this.exptVbSet.setXlsFileName(this.fileName);
@@ -1031,7 +1023,8 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 			if (idCol == null || valCol == null || defCol == null
 					|| typeCol == null || curCol == null)
-				throw new MalformedOoevvFileException("Misnamed Value Definition column headings");
+				throw new MalformedOoevvFileException(
+						"Misnamed Value Definition column headings");
 
 			String scale = this.getData(i + 1, scaleCol, vSheet);
 			String vid = this.getData(i + 1, idCol, vSheet);
@@ -1097,7 +1090,6 @@ public class OoevvExcelEngine extends ExcelEngine {
 			mv.setTermValue(val);
 			mv.setShortTermId(vid);
 			mv.setDefinition(def);
-			mv.setOntology(this.exptVbSet);
 
 			if (ontIdStr.length() > 0 && includeLookup) {
 
@@ -1106,21 +1098,21 @@ public class OoevvExcelEngine extends ExcelEngine {
 				List<Term> termHits = new ArrayList<Term>();
 				Term vTerm = null;
 				Ontology o = null;
-				
+
 				termHits = bps.termSearch(ontId, vid);
 				ontHits = bps.ontologySearch(ontId);
-				
+
 				if (ontHits.size() == 1) {
 
 					o = ontHits.get(0);
-					
+
 				} else {
 
 					throw new Exception(ontId + " returns " + termHits.size()
 							+ " results, should be a unique ontology.");
 
 				}
-				
+
 				if (termHits.size() == 1) {
 
 					vTerm = termHits.get(0);
@@ -1128,14 +1120,14 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				} else {
 
-					throw new Exception(o.getDisplayName() + ":" + vid + 
-							" returns " + termHits.size()
+					throw new Exception(o.getDisplayName() + ":" + vid
+							+ " returns " + termHits.size()
 							+ " results, should be unique.");
 
 				}
 
 			}
-			
+
 			valueScaleLookup.put(mv, scale);
 
 			if (vid == null || vid.length() == 0) {
@@ -1145,8 +1137,6 @@ public class OoevvExcelEngine extends ExcelEngine {
 			values.put(vid, mv);
 
 		}
-		
-
 
 		// ____________________________________________
 
@@ -1155,7 +1145,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 		int nScales = sDim.height - 1;
 
 		Map<String, MeasurementScale> scales = new HashMap<String, MeasurementScale>();
-		
+
 		// detect column headings
 		ch = getColumnHeadings(sSheet);
 
@@ -1206,9 +1196,9 @@ public class OoevvExcelEngine extends ExcelEngine {
 				BinaryValue trueValue = (BinaryValue) values
 						.get(sValues.get(0));
 				trueValue.setBinaryValue(true);
-				
-				BinaryValue falseValue = (BinaryValue) values
-						.get(sValues.get(1));
+
+				BinaryValue falseValue = (BinaryValue) values.get(sValues
+						.get(1));
 				falseValue.setBinaryValue(false);
 
 				if (trueValue == null || falseValue == null)
@@ -1327,15 +1317,9 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				CompositeScale mvcs = (CompositeScale) ms;
 
-				Iterator<String> idIt = sValues.iterator();
-				String s = "";
-				while (idIt.hasNext()) {
-					if( s.length() > 0 ) 
-						s += ",";
-					s += idIt.next();
-				}
-				compositeScales.put(mvcs, s);
-				
+				compositeScales.put(mvcs, sValues);
+				subVariables.addAll(sValues);
+
 			} else if (sType.equals("FileScale")) {
 
 				ms = new FileScale();
@@ -1343,10 +1327,10 @@ public class OoevvExcelEngine extends ExcelEngine {
 				FileScale fs = (FileScale) ms;
 
 				// Set the file extension in the first column
-				if(sValues.size() > 0) 
+				if (sValues.size() > 0)
 					fs.setSuffix(sValues.get(0));
-				
-				if(sValues.size() > 1) 
+
+				if (sValues.size() > 1)
 					fs.setMimeType(sValues.get(1));
 
 			} else {
@@ -1361,7 +1345,6 @@ public class OoevvExcelEngine extends ExcelEngine {
 			ms.setTermValue(sName);
 			ms.setShortTermId(sid);
 			ms.setDefinition(sDef);
-			ms.setOntology(this.exptVbSet);
 
 			scales.put(sid, ms);
 
@@ -1458,6 +1441,11 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 			ExperimentalVariable v = new ExperimentalVariable();
 			v.setElementType("ExperimentalVariable");
+			if (subVariables.contains(vid)) {
+				SubVariable subV = new SubVariable();
+				v = subV;
+				v.setElementType("SubVariable");
+			}
 			v.setTermValue(vName);
 			v.setShortTermId(vid);
 			v.setDefinition(vDef);
@@ -1471,13 +1459,13 @@ public class OoevvExcelEngine extends ExcelEngine {
 				v.setScale(ms);
 			}
 
-			v.setOntology(this.exptVbSet);
-			this.exptVbSet.getTerm().add(v);
-			
+			v.getOoevvSet().add(this.exptVbSet);
+			this.exptVbSet.getOoevvEls().add(v);
+
 			exVbLookup.put(v.getShortTermId(), v);
 
 		}
-		
+
 		vSheet = "OoEVV Processes";
 		vDim = this.getMatrixDimensions(vSheet);
 		ch = getColumnHeadings(vSheet);
@@ -1493,8 +1481,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 			Integer curCol = ch.get("curator");
 
 			if (idCol == null || nameCol == null || defCol == null
-					|| termCol == null || comCol == null
-					|| curCol == null)
+					|| termCol == null || comCol == null || curCol == null)
 				throw new Exception(
 						"Misnamed Variable Definition column headings");
 
@@ -1526,7 +1513,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 			 * new BadlyFormedTermNameException(
 			 * "Slash signs are not allowed in term names"); }
 			 */
-			
+
 			Term obi = null;
 			if (vObi.length() > 0 && includeLookup) {
 
@@ -1549,14 +1536,12 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				} else {
 
-					throw new Exception(vObi + " returns "
-							+ measureHits.size()
+					throw new Exception(vObi + " returns " + measureHits.size()
 							+ " results, should be unique.");
 
 				}
 
 			}
-
 
 			OoevvProcess v = new OoevvProcess();
 			v.setElementType("OoevvProcess");
@@ -1565,9 +1550,9 @@ public class OoevvExcelEngine extends ExcelEngine {
 			v.setDefinition(vDef);
 
 			v.setObiTerm(obi);
-			
-			v.setOntology(this.exptVbSet);
-			this.exptVbSet.getTerm().add(v);
+
+			v.getOoevvSet().add(this.exptVbSet);
+			this.exptVbSet.getOoevvEls().add(v);
 
 		}
 
@@ -1586,8 +1571,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 			Integer curCol = ch.get("curator");
 
 			if (idCol == null || nameCol == null || defCol == null
-					|| termCol == null || comCol == null
-					|| curCol == null)
+					|| termCol == null || comCol == null || curCol == null)
 				throw new Exception(
 						"Misnamed Variable Definition column headings");
 
@@ -1619,7 +1603,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 			 * new BadlyFormedTermNameException(
 			 * "Slash signs are not allowed in term names"); }
 			 */
-			
+
 			Term obi = null;
 			if (vObi.length() > 0 && includeLookup) {
 
@@ -1641,8 +1625,7 @@ public class OoevvExcelEngine extends ExcelEngine {
 
 				} else {
 
-					throw new Exception(vObi + " returns "
-							+ measureHits.size()
+					throw new Exception(vObi + " returns " + measureHits.size()
 							+ " results, should be unique.");
 
 				}
@@ -1654,40 +1637,43 @@ public class OoevvExcelEngine extends ExcelEngine {
 			e.setTermValue(vName);
 			e.setShortTermId(vid);
 			e.setDefinition(vDef);
-			e.setOntology(this.exptVbSet);
+			e.getOoevvSet().add(this.exptVbSet);
 			e.setObiTerm(obi);
-			
-			this.exptVbSet.getTerm().add(e);
+
+			this.exptVbSet.getOoevvEls().add(e);
 
 		}
-		
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		// Now that we have a good list of variables constructed, 
-		// we can link the multi-variable scales. 
+
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		// Now that we have a good list of variables constructed,
+		// we can link the multi-variable scales.
 		//
 		Pattern patt = Pattern.compile("^\\w+$");
 		Iterator<CompositeScale> compIt = compositeScales.keySet().iterator();
-		SCALE: while( compIt.hasNext() ) {
+		SCALE: while (compIt.hasNext()) {
 			CompositeScale mvcs = compIt.next();
-			String subVbListString = compositeScales.get(mvcs);
-			String[] subVbList = subVbListString.split(",");
-			for(int i=0; i<subVbList.length; i++) {
-				String subVbId = subVbList[i];
+			List<String> subVbList = compositeScales.get(mvcs);
+			for (String subVbId : subVbList) {
+
 				Matcher match = patt.matcher(subVbId);
-				if( match.find() || subVbId.length() == 0 ) {
+				if (match.find() || subVbId.length() == 0) {
 					continue SCALE;
 				}
-				if( !exVbLookup.containsKey(subVbId) ) {
-					throw new Exception("Can't find "+ subVbId + " in specification of " + 
-								"MultiVariableCompositeScale: " + mvcs.getShortTermId());
+
+				if (!exVbLookup.containsKey(subVbId)) {
+					throw new Exception("Can't find " + subVbId
+							+ " in specification of "
+							+ "MultiVariableCompositeScale: "
+							+ mvcs.getShortTermId());
 				} else {
 					ExperimentalVariable ev = exVbLookup.get(subVbId);
-					mvcs.getHasParts().add(ev);
-					ev.getPartOf().add(mvcs);
+					SubVariable sv = (SubVariable) ev;
+					mvcs.getHasParts().add(sv);
+					sv.getPartOf().add(mvcs);
 				}
 			}
 		}
-		
+
 		return this.exptVbSet;
 
 	}

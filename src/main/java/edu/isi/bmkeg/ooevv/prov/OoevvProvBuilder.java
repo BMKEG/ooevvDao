@@ -34,6 +34,7 @@ import edu.isi.bmkeg.ooevv.model.OoevvElement;
 import edu.isi.bmkeg.ooevv.model.OoevvElementSet;
 import edu.isi.bmkeg.ooevv.model.OoevvEntity;
 import edu.isi.bmkeg.ooevv.model.OoevvProcess;
+import edu.isi.bmkeg.ooevv.model.SubVariable;
 import edu.isi.bmkeg.ooevv.model.scale.BinaryScale;
 import edu.isi.bmkeg.ooevv.model.scale.BinaryScaleWithNamedValues;
 import edu.isi.bmkeg.ooevv.model.scale.CompositeScale;
@@ -131,7 +132,7 @@ public class OoevvProvBuilder {
 		NamedBundle repBundle = makeOoevvFullGraph(pFactory, oes);
 		provDoc.getStatementOrBundle().add(repBundle);
 
-		namespaces.put(oes.getShortName(), oes.getNs()); 
+		namespaces.put(oes.getTermValue(), oes.getOntology().getNs()); 
 		namespaces.put("xsd", NamespacePrefixMapper.XSD_NS);
 		namespaces.put(DOT_PREFIX, DOT_NS);
 		pFactory.setNamespaces(namespaces);	
@@ -142,12 +143,12 @@ public class OoevvProvBuilder {
 		// Write to temp file
 		//
 		File tempDir = Files.createTempDir();
-		File ooevvProvnFile = new File(tempDir.getPath() + "/" + oes.getShortName() + "_ooevvProv.provn");		
-		File ooevvXmlFile = new File(tempDir.getPath() + "/" + oes.getShortName() + "_ooevvProv.xml");		
-		File ooevvJsonFile = new File(tempDir.getPath() + "/" + oes.getShortName() + "_ooevvProv.json");
-		File ooevvDotFile = new File(tempDir.getPath() + "/" + oes.getShortName() + "_ooevvProv.dot");
-		File ooevvPdfFile = new File(tempDir.getPath() + "/" + oes.getShortName() + "_ooevvProv.pdf");
-		File ooevvRdfFile = new File(tempDir.getPath() + "/" + oes.getShortName() + "_ooevvProv.rdf");
+		File ooevvProvnFile = new File(tempDir.getPath() + "/" + oes.getTermValue() + "_ooevvProv.provn");		
+		File ooevvXmlFile = new File(tempDir.getPath() + "/" + oes.getTermValue() + "_ooevvProv.xml");		
+		File ooevvJsonFile = new File(tempDir.getPath() + "/" + oes.getTermValue() + "_ooevvProv.json");
+		File ooevvDotFile = new File(tempDir.getPath() + "/" + oes.getTermValue() + "_ooevvProv.dot");
+		File ooevvPdfFile = new File(tempDir.getPath() + "/" + oes.getTermValue() + "_ooevvProv.pdf");
+		File ooevvRdfFile = new File(tempDir.getPath() + "/" + oes.getTermValue() + "_ooevvProv.rdf");
 		
 		InteropFramework iop = new InteropFramework();
 		
@@ -222,16 +223,15 @@ public class OoevvProvBuilder {
 		Set<Entity> entities = new HashSet<Entity>();
 		Set<Activity> activities = new HashSet<Activity>();
 		
-		for(Term t : oes.getTerm()) {
+		for(OoevvElement t : oes.getOoevvEls()) {
 
-			QName thisQn = new QName( oes.getNs(), 
+			QName thisQn = new QName( oes.getOntology().getNs(), 
 					t.getShortTermId(), 
-					oes.getShortName() );
+					oes.getShortTermId() );
 			
 			if( t instanceof ExperimentalVariable ) {
 				
-				ExperimentalVariable exptVb = (ExperimentalVariable) t;
-				if( exptVb.getPartOf().size() > 0 ) {
+				if( t instanceof SubVariable) {
 					continue;
 				}
 
@@ -243,7 +243,7 @@ public class OoevvProvBuilder {
 				entities.add(e);	
 				
 			}
-			else if( t instanceof MeasurementScale ) {
+			/*else if( t instanceof MeasurementScale ) {
 				
 				MeasurementScale ms = (MeasurementScale) t;
 				QName parentQn = new QName( OOEVV_NS, 
@@ -254,7 +254,7 @@ public class OoevvProvBuilder {
 				
 				pFactory.addType(e, parentQn, ValueConverter.QNAME_XSD_QNAME);		
 				entities.add(e);				
-			}
+			}*/
 			else if( t instanceof OoevvEntity ) {
 			
 				Entity e = pFactory.newEntity(thisQn, 
@@ -274,9 +274,9 @@ public class OoevvProvBuilder {
 		Activity[] aArray = activities.toArray(new Activity[]{});
 		Entity[] eArray = entities.toArray(new Entity[]{});
 		
-		QName qn = new QName( oes.getNs(), 
-				oes.getShortName(), 
-				oes.getShortName() );
+		QName qn = new QName( oes.getOntology().getNs(), 
+				oes.getShortTermId(), 
+				oes.getShortTermId() );
 		
 		NamedBundle graph = pFactory.newNamedBundle(qn, 
 				activities,
@@ -286,7 +286,7 @@ public class OoevvProvBuilder {
 		);
 
 		Hashtable<String,String> namespaces = new Hashtable<String, String>();
-		namespaces.put(oes.getShortName(), oes.getNs());
+		namespaces.put(oes.getShortTermId(), oes.getOntology().getNs());
 		graph.setNss(namespaces);
 		
 		return graph;

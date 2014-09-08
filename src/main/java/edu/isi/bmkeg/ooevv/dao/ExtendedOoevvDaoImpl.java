@@ -19,6 +19,12 @@ import edu.isi.bmkeg.ooevv.model.OoevvElement;
 import edu.isi.bmkeg.ooevv.model.OoevvElementSet;
 import edu.isi.bmkeg.ooevv.model.OoevvEntity;
 import edu.isi.bmkeg.ooevv.model.OoevvProcess;
+import edu.isi.bmkeg.ooevv.model.qo.ExperimentalVariable_qo;
+import edu.isi.bmkeg.ooevv.model.qo.OoevvElementSet_qo;
+import edu.isi.bmkeg.ooevv.model.qo.OoevvEntity_qo;
+import edu.isi.bmkeg.ooevv.model.qo.OoevvProcess_qo;
+import edu.isi.bmkeg.ooevv.model.qo.scale.MeasurementScale_qo;
+import edu.isi.bmkeg.ooevv.model.qo.value.MeasurementValue_qo;
 import edu.isi.bmkeg.ooevv.model.scale.BinaryScaleWithNamedValues;
 import edu.isi.bmkeg.ooevv.model.scale.CompositeScale;
 import edu.isi.bmkeg.ooevv.model.scale.HierarchicalScale;
@@ -31,10 +37,8 @@ import edu.isi.bmkeg.ooevv.model.value.MeasurementValue;
 import edu.isi.bmkeg.ooevv.model.value.NominalValue;
 import edu.isi.bmkeg.ooevv.model.value.OrdinalValue;
 import edu.isi.bmkeg.terminology.model.Term;
-import edu.isi.bmkeg.utils.superGraph.SuperGraphNode;
 import edu.isi.bmkeg.vpdmf.dao.CoreDao;
 import edu.isi.bmkeg.vpdmf.dao.CoreDaoImpl;
-import edu.isi.bmkeg.vpdmf.model.definitions.PrimitiveDefinition;
 import edu.isi.bmkeg.vpdmf.model.definitions.ViewDefinition;
 import edu.isi.bmkeg.vpdmf.model.instances.AttributeInstance;
 import edu.isi.bmkeg.vpdmf.model.instances.LightViewInstance;
@@ -117,7 +121,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		Set<OoevvProcess> procs = new HashSet<OoevvProcess>();
 
-		Iterator<Term> procIt = exptVbSet.getTerm().iterator();
+		Iterator<OoevvElement> procIt = exptVbSet.getOoevvEls().iterator();
 		while (procIt.hasNext()) {
 			OoevvElement el = (OoevvElement) procIt.next();
 			if( el instanceof OoevvProcess ) {				
@@ -136,7 +140,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		Set<OoevvEntity> entities = new HashSet<OoevvEntity>();
 
-		Iterator<Term> entityIt = exptVbSet.getTerm().iterator();
+		Iterator<OoevvElement> entityIt = exptVbSet.getOoevvEls().iterator();
 		while (entityIt.hasNext()) {
 			OoevvElement el = (OoevvElement) entityIt.next();
 			if( el instanceof OoevvEntity ) {	
@@ -153,7 +157,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		Set<ExperimentalVariable> exptVbs = new HashSet<ExperimentalVariable>();
 
-		Iterator<Term> exptVbIt = exptVbSet.getTerm().iterator();
+		Iterator<OoevvElement> exptVbIt = exptVbSet.getOoevvEls().iterator();
 		while (exptVbIt.hasNext()) {
 			OoevvElement el = (OoevvElement) exptVbIt.next();
 			if( el instanceof ExperimentalVariable ) {	
@@ -170,7 +174,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		Set<MeasurementScale> scales = new HashSet<MeasurementScale>();
 
-		Iterator<Term> exptVbIt = exptVbSet.getTerm().iterator();
+		Iterator<OoevvElement> exptVbIt = exptVbSet.getOoevvEls().iterator();
 		while (exptVbIt.hasNext()) {
 			OoevvElement el = (OoevvElement) exptVbIt.next();
 			if( el instanceof ExperimentalVariable ) {	
@@ -192,7 +196,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 		// explore the data and list all the objects in an accessible way.
 		Set<MeasurementValue> values = new HashSet<MeasurementValue>();
 
-		Iterator<Term> exptVbIt = exptVbSet.getTerm().iterator();
+		Iterator<OoevvElement> exptVbIt = exptVbSet.getOoevvEls().iterator();
 		while (exptVbIt.hasNext()) {
 			OoevvElement el = (OoevvElement) exptVbIt.next();
 			if( !(el instanceof ExperimentalVariable) ) {
@@ -260,7 +264,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 		// TODO: NEED TO ADD EQUIVALENT LISTING OF ONTOLOGIES
 		//terms.add(exptVbSet);
 
-		Iterator<Term> exptVbIt = exptVbSet.getTerm().iterator();
+		Iterator<OoevvElement> exptVbIt = exptVbSet.getOoevvEls().iterator();
 		while (exptVbIt.hasNext()) {
 			//
 			OoevvElement el = (OoevvElement) exptVbIt.next();
@@ -330,7 +334,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		}
 
-		Iterator<Term> procIt = exptVbSet.getTerm().iterator();
+		Iterator<OoevvElement> procIt = exptVbSet.getOoevvEls().iterator();
 		while (procIt.hasNext()) {
 			OoevvElement el = (OoevvElement) procIt.next();
 			if( !(el instanceof OoevvProcess) ) {
@@ -344,7 +348,7 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			}
 		}
 
-		Iterator<Term> entIt = exptVbSet.getTerm().iterator();
+		Iterator<OoevvElement> entIt = exptVbSet.getOoevvEls().iterator();
 		while (entIt.hasNext()) {
 			OoevvElement el = (OoevvElement) entIt.next();
 			if( !(el instanceof OoevvEntity) ) {
@@ -365,20 +369,20 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 	// ~~~~~~~~~~~~~~~~~~~~~
 	// Database interactions
 	// ~~~~~~~~~~~~~~~~~~~~~
-	public void insertOoevvElementSetInDatabase(OoevvElementSet exptVbSet)
+	public void insertOoevvElementSetInDatabase(OoevvElementSet oes)
 			throws Exception {
 
 		Set<ExperimentalVariable> exptVbs = ExtendedOoevvDaoImpl
-				.listExptVbsInObjectGraph(exptVbSet);
+				.listExptVbsInObjectGraph(oes);
 		Set<OoevvProcess> procs = ExtendedOoevvDaoImpl
-				.listProcessesInObjectGraph(exptVbSet);
+				.listProcessesInObjectGraph(oes);
 		Set<OoevvEntity> ents = ExtendedOoevvDaoImpl
-				.listEntitiesInObjectGraph(exptVbSet);
+				.listEntitiesInObjectGraph(oes);
 		Set<MeasurementScale> scales = ExtendedOoevvDaoImpl
-				.listScalesInObjectGraph(exptVbSet);
+				.listScalesInObjectGraph(oes);
 		Set<MeasurementValue> values = ExtendedOoevvDaoImpl
-				.listValuesInObjectGraph(exptVbSet);
-		Set<Term> terms = ExtendedOoevvDaoImpl.listTerms(exptVbSet);
+				.listValuesInObjectGraph(oes);
+		Set<Term> terms = ExtendedOoevvDaoImpl.listTerms(oes);
 
 		try {
 
@@ -388,19 +392,16 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			//
 			// 1. insert the OoevvElementSet as a view
 			//
-			ViewBasedObjectGraph vbog1 = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "OoevvElementSet");
-			ViewInstance vi1 = vbog1.objectGraphToView(exptVbSet);
-			Map<String, Object> objMap1 = vbog1.getObjMap();
-
-			coreDao.getCe().executeInsertQuery(vi1);
-
-			Iterator<String> keyIt1 = objMap1.keySet().iterator();
-			while (keyIt1.hasNext()) {
-				String key = keyIt1.next();
-				PrimitiveInstance pi = (PrimitiveInstance) vi1.getSubGraph()
-						.getNodes().get(key);
-				Object o = objMap1.get(key);
-				vbog1.primitiveToObject(pi, o, true);
+			OoevvElementSet_qo oesQ = new OoevvElementSet_qo();
+			oesQ.setShortTermId( oes.getShortTermId() );
+			List<LightViewInstance> l = coreDao.listInTrans(oesQ, "OoevvElementSet");
+			if( l.size() == 0 ) {
+				coreDao.insertInTrans(oes, "OoevvElementSet");
+			} else if (l.size() == 1) {
+				oes.setVpdmfId( l.get(0).getVpdmfId() );
+				coreDao.updateInTrans(oes, "OoevvElementSet");
+			} else {
+				throw new Exception("Ambiguity in adding " + oes.getShortTermId());
 			}
 			
 			//
@@ -410,31 +411,16 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			while (vIt.hasNext()) {
 				MeasurementValue v = vIt.next();
 
-				String vName = v.getClass().getName();
-				vName = vName.substring(vName.lastIndexOf(".") + 1,
-						vName.length());
-				ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), vName);
-				
-				ViewInstance vi = null;
-				try {
-					vi = vbog.objectGraphToView(v);
-				} catch (Exception e) {
-					System.err
-							.println("Conversion error from object graph to view in value: "
-									+ v.getShortTermId());
-					throw e;
-				}
-				Map<String, Object> objMap = vbog.getObjMap();
-
-				coreDao.getCe().executeInsertQuery(vi);
-
-				Iterator<String> keyIt = objMap.keySet().iterator();
-				while (keyIt.hasNext()) {
-					String key = keyIt.next();
-					PrimitiveInstance pi = (PrimitiveInstance) vi.getSubGraph()
-							.getNodes().get(key);
-					Object o = objMap.get(key);
-					vbog.primitiveToObject(pi, o, true);
+				MeasurementValue_qo vQ = new MeasurementValue_qo();
+				vQ.setShortTermId( v.getShortTermId() );
+				l = coreDao.listInTrans(vQ, "MeasurementValue");
+				if( l.size() == 0 ) {
+					coreDao.insertInTrans(v, "MeasurementValue");
+				} else if (l.size() == 1) {
+					v.setVpdmfId( l.get(0).getVpdmfId() );
+					coreDao.updateInTrans(v, "MeasurementValue");
+				} else {
+					throw new Exception("Ambiguity in adding " + v.getShortTermId());
 				}
 
 			}
@@ -446,48 +432,25 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			while (sIt.hasNext()) {
 				MeasurementScale s = sIt.next();
 
+				if( s instanceof CompositeScale )
+					continue;
+
 				String sName = s.getClass().getName();
 				sName = sName.substring(sName.lastIndexOf(".") + 1,
 						sName.length());
-				ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), sName);
-				
-				ViewInstance vi = null;
-				try {
-					vi = vbog.objectGraphToView(s);
-				} catch (Exception e) {
-					System.err
-							.println("Conversion error from object graph to view in scale: "
-									+ s.getShortTermId());
-					throw e;
-				}
-				Map<String, Object> objMap = vbog.getObjMap();
 
-				if( s instanceof CompositeScale ) {
-					Map<String,SuperGraphNode> g = vi.getDefinition().getSubGraph().getNodes();
-					PrimitiveDefinition pd = (PrimitiveDefinition ) g.get("ExperimentalVariable");
-					vi.nullify(pd);
-					pd = (PrimitiveDefinition ) g.get("ExperimentalVariableTerm");
-					vi.nullify(pd);
-					pd = (PrimitiveDefinition ) g.get("ExperimentalVariableOntology");
-					vi.nullify(pd);
+				MeasurementScale_qo sQ = new MeasurementScale_qo();
+				sQ.setShortTermId( s.getShortTermId() );
+				l = coreDao.listInTrans(sQ, "MeasurementScale");
+				if( l.size() == 0 ) {
+					coreDao.insertInTrans(s, sName);
+				} else if (l.size() == 1) {
+					s.setVpdmfId( l.get(0).getVpdmfId() );
+					coreDao.updateInTrans(s, sName);
+				} else {
+					throw new Exception("Ambiguity in adding " + s.getShortTermId());
 				}
-				
-				coreDao.getCe().executeInsertQuery(vi);
-
-				Iterator<String> keyIt = objMap.keySet().iterator();
-				while (keyIt.hasNext()) {
-					String key = keyIt.next();
-					PrimitiveInstance pi = (PrimitiveInstance) vi.getSubGraph()
-							.getNodes().get(key);
-					Object o = objMap.get(key);
-					try {
-						vbog.primitiveToObject(pi, o, true);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
+							
 			}
 
 			//
@@ -497,38 +460,25 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			while (vbIt.hasNext()) {
 				ExperimentalVariable v = vbIt.next();
 
-				ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "ExperimentalVariable");
-
-				ViewInstance vi = null;
-				try {
-					vi = vbog.objectGraphToView(v);
-				} catch (Exception e) {
-					System.err
-							.println("Conversion error from object graph to view in variable: "
-									+ v.getShortTermId());
-					throw e;
-				}
-				Map<String, Object> objMap = vbog.getObjMap();
-
-				//
-				// Remove the set data from the update at this time...
-				// We will fill this in at the end. 
-				//
-				Map<String,SuperGraphNode> g = vi.getDefinition().getSubGraph().getNodes();
-				PrimitiveDefinition pd = (PrimitiveDefinition ) g.get("Set");
-				vi.nullify(pd);
+				if( v.getScale() instanceof CompositeScale ) 
+					continue;
 				
-				coreDao.getCe().executeInsertQuery(vi);
+				String vName = v.getClass().getName();
+				vName = vName.substring(vName.lastIndexOf(".") + 1,
+						vName.length());
 
-				Iterator<String> keyIt = objMap.keySet().iterator();
-				while (keyIt.hasNext()) {
-					String key = keyIt.next();
-					PrimitiveInstance pi = (PrimitiveInstance) vi.getSubGraph()
-							.getNodes().get(key);
-					Object o = objMap.get(key);
-					vbog.primitiveToObject(pi, o, true);
+				ExperimentalVariable_qo vQ = new ExperimentalVariable_qo();
+				vQ.setShortTermId( v.getShortTermId() );
+				l = coreDao.listInTrans(vQ, "ExperimentalVariable");
+				if( l.size() == 0 ) {
+					coreDao.insertInTrans(v, vName);
+				} else if (l.size() == 1) {
+					v.setVpdmfId( l.get(0).getVpdmfId() );
+					coreDao.updateInTrans(v, vName);
+				} else {
+					throw new Exception("Ambiguity in adding " + v.getShortTermId());
 				}
-
+			
 			}
 			
 			//
@@ -541,41 +491,49 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 				
 				if( !(s instanceof CompositeScale) )
 					continue;
-
+				
 				String sName = s.getClass().getName();
 				sName = sName.substring(sName.lastIndexOf(".") + 1,
 						sName.length());
-				ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), sName);
-
-				ViewInstance vi = null;
-				try {
-					vi = vbog.objectGraphToView(s);
-				} catch (Exception e) {
-					System.err
-							.println("Conversion error from object graph to view in scale: "
-									+ s.getShortTermId());
-					throw e;
-				}
-				Map<String, Object> objMap = vbog.getObjMap();
-
-				coreDao.getCe().storeViewInstanceForUpdate(vi);
-				coreDao.getCe().executeUpdateQuery(vi);
-
-				Iterator<String> keyIt = objMap.keySet().iterator();
-				while (keyIt.hasNext()) {
-					String key = keyIt.next();
-					PrimitiveInstance pi = (PrimitiveInstance) vi.getSubGraph()
-							.getNodes().get(key);
-					Object o = objMap.get(key);
-					try {
-						vbog.primitiveToObject(pi, o, true);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				
+				MeasurementScale_qo sQ = new MeasurementScale_qo();
+				sQ.setShortTermId( s.getShortTermId() );
+				l = coreDao.listInTrans(sQ, "MeasurementScale");
+				if( l.size() == 0 ) {
+					coreDao.insertInTrans(s, sName);
+				} else if (l.size() == 1) {
+					s.setVpdmfId( l.get(0).getVpdmfId() );
+					coreDao.updateInTrans(s, sName);
+				} else {
+					throw new Exception("Ambiguity in adding " + s.getShortTermId());
 				}
 
 			}
+
+			//
+			// 4b. Now fill in the accompanying variables
+			//
+			vbIt = exptVbs.iterator();
+			while (vbIt.hasNext()) {
+				ExperimentalVariable v = vbIt.next();
+				
+				if( !(v.getScale() instanceof CompositeScale) ) 
+					continue;
+				
+				ExperimentalVariable_qo vQ = new ExperimentalVariable_qo();
+				vQ.setShortTermId( v.getShortTermId() );
+				l = coreDao.listInTrans(vQ, "ExperimentalVariable");
+				if( l.size() == 0 ) {
+					coreDao.insertInTrans(v, "ExperimentalVariable");
+				} else if (l.size() == 1) {
+					v.setVpdmfId( l.get(0).getVpdmfId() );
+					coreDao.updateInTrans(v, "ExperimentalVariable");
+				} else {
+					throw new Exception("Ambiguity in adding " + v.getShortTermId());
+				}								
+				
+			}
+
 			
 			//
 			// 5. insert all the different Processes as views
@@ -584,36 +542,16 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			while (pIt.hasNext()) {
 				OoevvProcess v = pIt.next();
 
-				ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "OoevvProcess");
-
-				ViewInstance vi = null;
-				try {
-					vi = vbog.objectGraphToView(v);
-				} catch (Exception e) {
-					System.err
-							.println("Conversion error from object graph to view in process: "
-									+ v.getShortTermId());
-					throw e;
-				}
-				Map<String, Object> objMap = vbog.getObjMap();
-
-				//
-				// Remove the set data from the update at this time...
-				// We will fill this in at the end. 
-				//
-				Map<String,SuperGraphNode> g = vi.getDefinition().getSubGraph().getNodes();
-				PrimitiveDefinition pd = (PrimitiveDefinition ) g.get("Set");
-				vi.nullify(pd);
-				
-				coreDao.getCe().executeInsertQuery(vi);
-
-				Iterator<String> keyIt = objMap.keySet().iterator();
-				while (keyIt.hasNext()) {
-					String key = keyIt.next();
-					PrimitiveInstance pi = (PrimitiveInstance) vi.getSubGraph()
-							.getNodes().get(key);
-					Object o = objMap.get(key);
-					vbog.primitiveToObject(pi, o, true);
+				OoevvProcess_qo vQ = new OoevvProcess_qo();
+				vQ.setShortTermId( v.getShortTermId() );
+				l = coreDao.listInTrans(vQ, "OoevvProcess");
+				if( l.size() == 0 ) {
+					coreDao.insertInTrans(v, "OoevvProcess");
+				} else if (l.size() == 1) {
+					v.setVpdmfId( l.get(0).getVpdmfId() );
+					coreDao.updateInTrans(v, "OoevvProcess");
+				} else {
+					throw new Exception("Ambiguity in adding " + v.getShortTermId());
 				}
 
 			}
@@ -625,37 +563,17 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			while (entIt.hasNext()) {
 				OoevvEntity v = entIt.next();
 
-				ViewBasedObjectGraph vbog = new ViewBasedObjectGraph(coreDao.getTop(), coreDao.getCl(), "OoevvEntity");
-
-				ViewInstance vi = null;
-				try {
-					vi = vbog.objectGraphToView(v);
-				} catch (Exception e) {
-					System.err
-							.println("Conversion error from object graph to view in variable: "
-									+ v.getShortTermId());
-					throw e;
-				}
-				Map<String, Object> objMap = vbog.getObjMap();
-
-				//
-				// Remove the set data from the update at this time...
-				// We will fill this in at the end. 
-				//
-				Map<String,SuperGraphNode> g = vi.getDefinition().getSubGraph().getNodes();
-				PrimitiveDefinition pd = (PrimitiveDefinition ) g.get("Set");
-				vi.nullify(pd);
-				
-				coreDao.getCe().executeInsertQuery(vi);
-
-				Iterator<String> keyIt = objMap.keySet().iterator();
-				while (keyIt.hasNext()) {
-					String key = keyIt.next();
-					PrimitiveInstance pi = (PrimitiveInstance) vi.getSubGraph()
-							.getNodes().get(key);
-					Object o = objMap.get(key);
-					vbog.primitiveToObject(pi, o, true);
-				}
+				OoevvEntity_qo vQ = new OoevvEntity_qo();
+				vQ.setShortTermId( v.getShortTermId() );
+				l = coreDao.listInTrans(vQ, "OoevvEntity");
+				if( l.size() == 0 ) {
+					coreDao.insertInTrans(v, "OoevvEntity");
+				} else if (l.size() == 1) {
+					v.setVpdmfId( l.get(0).getVpdmfId() );
+					coreDao.updateInTrans(v, "OoevvEntity");
+				} else {
+					throw new Exception("Ambiguity in adding " + v.getShortTermId());
+				}									
 
 			}
 			

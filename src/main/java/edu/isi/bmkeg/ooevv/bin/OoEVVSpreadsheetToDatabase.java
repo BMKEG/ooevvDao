@@ -38,7 +38,7 @@ public class OoEVVSpreadsheetToDatabase {
 		dao.init(args[2], args[3], args[1], args[4]);
 
 		boolean lookup = false; 
-		if( args.length == 5 )
+		if( args.length == 6 )
 			lookup = true;
 		
 		OoevvElementSet exptVbSet = xlEngine
