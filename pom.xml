@@ -51,7 +51,7 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>edu.isi.bmkeg</groupId>
-									<artifactId>ooevv</artifactId>
+									<artifactId>vpdmf-ooevv</artifactId>
 									<type>zip</type>
 									<classifier>mysql</classifier>
 									<outputDirectory>${project.build.directory}/vpdmf/edu/isi/bmkeg/ooevv</outputDirectory>
@@ -179,6 +179,11 @@
 			<artifactId>gson</artifactId>
 			<version>1.4</version>
 			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>edu.isi.bmkeg</groupId>
+			<artifactId>vpdmfBigData</artifactId>
 		</dependency>
 
 		<dependency>

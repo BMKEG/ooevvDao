@@ -386,6 +386,8 @@ public class OoevvExcelEngine extends ExcelEngine {
 				.listProcessesInObjectGraph(exptVbSet);
 		Set<OoevvEntity> entities = ExtendedOoevvDaoImpl
 				.listEntitiesInObjectGraph(exptVbSet);
+		
+		this.exptVbSet = exptVbSet;
 
 		return this.generateOoevvExcelWorkbook(exptVbs, scales, processes,
 				entities);
@@ -477,15 +479,15 @@ public class OoevvExcelEngine extends ExcelEngine {
 		c.setCellStyle(getCs());
 		c.setCellValue("term");
 
-		c = r.createCell((short) 3);
+		c = r.createCell((short) 4);
 		c.setCellStyle(getCs());
 		c.setCellValue("scale");
 
-		c = r.createCell((short) 4);
+		c = r.createCell((short) 5);
 		c.setCellStyle(getCs());
 		c.setCellValue("comments");
 
-		c = r.createCell((short) 5);
+		c = r.createCell((short) 6);
 		c.setCellStyle(getCs());
 		c.setCellValue("curator");
 
@@ -506,16 +508,20 @@ public class OoevvExcelEngine extends ExcelEngine {
 			c.setCellValue(vb.getDefinition());
 
 			c = r.createCell((short) 3);
-			c.setCellValue(vb.getMeasures().getShortTermId());
-
-			c = r.createCell((short) 3);
-			c.setCellValue(vb.getScale().getShortTermId());
+			if( vb.getMeasures() != null ) {
+				c.setCellValue(vb.getMeasures().getShortTermId());
+			}
 
 			c = r.createCell((short) 4);
+			if( vb.getScale() != null ) {
+				c.setCellValue(vb.getScale().getShortTermId());
+			}
+
+			c = r.createCell((short) 5);
 			c.setCellValue("");
 
 			// remove tracking of curator for all terms
-			c = r.createCell((short) 5);
+			c = r.createCell((short) 6);
 			String cStr = "";
 			/*
 			 * Iterator<TerminologyCurator> cIt = vb.getDefinitionEditor()
@@ -803,7 +809,8 @@ public class OoevvExcelEngine extends ExcelEngine {
 			c.setCellValue(p.getDefinition());
 
 			c = r.createCell((short) 3);
-			c.setCellValue(p.getObiTerm().getShortTermId());
+			if( p.getObiTerm() != null)
+				c.setCellValue(p.getObiTerm().getShortTermId());
 
 			c = r.createCell((short) 4);
 			c.setCellValue("");
@@ -869,8 +876,9 @@ public class OoevvExcelEngine extends ExcelEngine {
 			c.setCellValue(e.getDefinition());
 
 			c = r.createCell((short) 3);
-			c.setCellValue(e.getObiTerm().getShortTermId());
-
+			if( e.getObiTerm() != null ) {
+				c.setCellValue(e.getObiTerm().getShortTermId());
+			}
 			c = r.createCell((short) 4);
 			c.setCellValue("");
 
@@ -1677,6 +1685,655 @@ public class OoevvExcelEngine extends ExcelEngine {
 		return this.exptVbSet;
 
 	}
+	
+/*	public OoevvElementSet createExpVariableSetFromLatestObi()
+			throws Exception {
+
+		this.exptVbSet = new OoevvElementSet();
+		
+		Map<CompositeScale, List<String>> compositeScales = new HashMap<CompositeScale, List<String>>();
+		Set<String> subVariables = new HashSet<String>();
+		Map<String, ExperimentalVariable> exVbLookup = new HashMap<String, ExperimentalVariable>();
+		Map<MeasurementValue, String> valueScaleLookup = new HashMap<MeasurementValue, String>();
+
+		// ____________________________________________
+
+		String vSheet = "OoEVV Values";
+		Dimension vDim = this.getMatrixDimensions(vSheet);
+		Map<String, Integer> ch = getColumnHeadings(vSheet);
+		int nValues = vDim.height - 1;
+
+		Map<String, MeasurementValue> values = new HashMap<String, MeasurementValue>();
+
+		for (int i = 0; i < nValues; i++) {
+
+			Integer idCol = ch.get("shortId");
+			Integer scaleCol = ch.get("scale");
+			Integer valCol = ch.get("value");
+			Integer defCol = ch.get("definition");
+			Integer typeCol = ch.get("type");
+			Integer ontIdCol = ch.get("ontologyId");
+			Integer curCol = ch.get("curator");
+
+			if (idCol == null || valCol == null || defCol == null
+					|| typeCol == null || curCol == null)
+				throw new MalformedOoevvFileException(
+						"Misnamed Value Definition column headings");
+
+			String scale = this.getData(i + 1, scaleCol, vSheet);
+			String vid = this.getData(i + 1, idCol, vSheet);
+			String val = this.getData(i + 1, valCol, vSheet);
+			String def = this.getData(i + 1, defCol, vSheet);
+			String type = this.getData(i + 1, typeCol, vSheet);
+
+			String ontIdStr = this.getData(i + 1, ontIdCol, vSheet);
+			if (ontIdStr.lastIndexOf(".") != -1)
+				ontIdStr = ontIdStr.substring(0, ontIdStr.lastIndexOf("."));
+
+			String cur = this.getData(i + 1, curCol, vSheet);
+
+			if (vid == null || vid.isEmpty())
+				continue;
+
+			// ____________________________________________
+			// Read the spreadsheet and instantiate
+			// OoEVV MeasurementValue objects appropriately
+			//
+			MeasurementValue mv = null;
+			if (type.equals("BinaryValue")) {
+
+				mv = new BinaryValue();
+
+			} else if (type.equals("IntegerValue")) {
+
+				mv = new IntegerValue();
+
+				// how to deal with units?
+
+			} else if (type.equals("DecimalValue")) {
+
+				mv = new DecimalValue();
+
+				// how to deal with units?
+
+			} else if (type.equals("NominalValue")) {
+
+				mv = new NominalValue();
+
+			} else if (type.equals("OrdinalValue")) {
+
+				mv = new OrdinalValue();
+
+			} else if (type.equals("RelativeTermValue")) {
+
+				mv = new RelativeValue();
+				RelativeValue rts = (RelativeValue) mv;
+
+			} else if (type.equals("HierarchicalValue")) {
+
+				mv = new HierarchicalValue();
+				HierarchicalValue hts = (HierarchicalValue) mv;
+
+			} else {
+
+				throw new Exception("Don't recognize " + type
+						+ ", as a type of value");
+
+			}
+
+			mv.setTermValue(val);
+			mv.setShortTermId(vid);
+			mv.setDefinition(def);
+
+			if (ontIdStr.length() > 0 && includeLookup) {
+
+				Integer ontId = new Integer(ontIdStr);
+				List<Ontology> ontHits = new ArrayList<Ontology>();
+				List<Term> termHits = new ArrayList<Term>();
+				Term vTerm = null;
+				Ontology o = null;
+
+				termHits = bps.termSearch(ontId, vid);
+				ontHits = bps.ontologySearch(ontId);
+
+				if (ontHits.size() == 1) {
+
+					o = ontHits.get(0);
+
+				} else {
+
+					throw new Exception(ontId + " returns " + termHits.size()
+							+ " results, should be a unique ontology.");
+
+				}
+
+				if (termHits.size() == 1) {
+
+					vTerm = termHits.get(0);
+					vTerm.setOntology(o);
+
+				} else {
+
+					throw new Exception(o.getDisplayName() + ":" + vid
+							+ " returns " + termHits.size()
+							+ " results, should be unique.");
+
+				}
+
+			}
+
+			valueScaleLookup.put(mv, scale);
+
+			if (vid == null || vid.length() == 0) {
+				continue;
+			}
+
+			values.put(vid, mv);
+
+		}
+
+		// ____________________________________________
+
+		sSheet = "OoEVV Scales";
+		Dimension sDim = this.getMatrixDimensions(sSheet);
+		int nScales = sDim.height - 1;
+
+		Map<String, MeasurementScale> scales = new HashMap<String, MeasurementScale>();
+
+		// detect column headings
+		ch = getColumnHeadings(sSheet);
+
+		for (int i = 0; i < nScales; i++) {
+
+			// ____________________________________________
+			// Read the spreadsheet.
+			//
+			String sid = this.getData(i + 1, ch.get("shortId"), sSheet);
+			String sName = this.getData(i + 1, ch.get("name"), sSheet);
+			String sDef = this.getData(i + 1, ch.get("definition"), sSheet);
+			String sType = this.getData(i + 1, ch.get("type"), sSheet);
+			String sUnits = this.getData(i + 1, ch.get("units"), sSheet);
+			String sCurator = this.getData(i + 1, ch.get("curator"), sSheet);
+
+			if (sName.length() == 0)
+				continue;
+
+			List<String> sValues = new ArrayList<String>();
+			int valCol = ch.get("values");
+			String sValue = this.getData(i + 1, valCol, sSheet);
+			while (sValue.length() > 0 && valCol < sDim.width) {
+				sValues.add(sValue);
+				valCol++;
+				if (valCol < sDim.width)
+					sValue = this.getData(i + 1, valCol, sSheet);
+			}
+
+			// ____________________________________________
+			// Read the spreadsheet and instantiate
+			// an OoEVV scale appropriately
+			//
+			MeasurementScale ms = null;
+			if (sType.equals("BinaryScale")) {
+
+				ms = new BinaryScale();
+
+			} else if (sType.equals("BinaryScaleWithNamedValues")) {
+
+				ms = new BinaryScaleWithNamedValues();
+				BinaryScaleWithNamedValues bswnv = (BinaryScaleWithNamedValues) ms;
+
+				if (sValues.size() != 2)
+					throw new Exception(
+							"Please specify named values for BinaryScaleWithNamedValues:"
+									+ sName);
+
+				BinaryValue trueValue = (BinaryValue) values
+						.get(sValues.get(0));
+				trueValue.setBinaryValue(true);
+
+				BinaryValue falseValue = (BinaryValue) values.get(sValues
+						.get(1));
+				falseValue.setBinaryValue(false);
+
+				if (trueValue == null || falseValue == null)
+					throw new Exception(
+							"Nulls in true / false values for BinaryScaleWithNamedValues:"
+									+ sName);
+
+				bswnv.setTrueValue(trueValue);
+				bswnv.setFalseValue(falseValue);
+
+			} else if (sType.equals("IntegerScale")) {
+
+				ms = new IntegerScale();
+
+				// how to deal with units?
+
+			} else if (sType.equals("DecimalScale")) {
+
+				ms = new DecimalScale();
+
+				// how to deal with units?
+
+			} else if (sType.equals("TimestampScale")) {
+
+				ms = new TimestampScale();
+				TimestampScale tss = (TimestampScale) ms;
+				tss.setFormat(sValue);
+
+			} else if (sType.equals("NaturalLanguageScale")) {
+
+				ms = new NaturalLanguageScale();
+
+			} else if (sType.equals("NominalScale")) {
+
+				ms = new NominalScale();
+
+			} else if (sType.equals("NominalScaleWithAllowedTerms")) {
+
+				ms = new NominalScaleWithAllowedTerms();
+
+				NominalScaleWithAllowedTerms bswnv = (NominalScaleWithAllowedTerms) ms;
+
+				Iterator<String> idIt = sValues.iterator();
+				while (idIt.hasNext()) {
+					String id = idIt.next();
+					NominalValue av = (NominalValue) values.get(id);
+					if (av != null)
+						bswnv.getNVal().add(av);
+				}
+
+			} else if (sType.equals("OrdinalScale")) {
+
+				ms = new OrdinalScale();
+
+			} else if (sType.equals("OrdinalScaleWithMaxRank")) {
+
+				ms = new OrdinalScaleWithMaxRank();
+				OrdinalScaleWithMaxRank oswr = (OrdinalScaleWithMaxRank) ms;
+				Iterator<String> idIt = sValues.iterator();
+				while (idIt.hasNext()) {
+					String id = idIt.next();
+					Float temp = new Float(id);
+					Long max = temp.longValue();
+					oswr.setMaximumRank(max.intValue());
+				}
+
+			} else if (sType.equals("OrdinalScaleWithNamedRanks")) {
+
+				ms = new OrdinalScaleWithNamedRanks();
+
+				OrdinalScaleWithNamedRanks oswnr = (OrdinalScaleWithNamedRanks) ms;
+
+				int r = 0;
+				Iterator<String> idIt = sValues.iterator();
+				while (idIt.hasNext()) {
+					String id = idIt.next();
+					OrdinalValue av = (OrdinalValue) values.get(id);
+					if (av != null) {
+						oswnr.getOVal().add(av);
+						av.setRank(r);
+						r++;
+					}
+				}
+
+			} else if (sType.equals("RelativeTermScale")) {
+
+				ms = new RelativeTermScale();
+				RelativeTermScale rts = (RelativeTermScale) ms;
+
+				Iterator<String> idIt = sValues.iterator();
+				while (idIt.hasNext()) {
+					String id = idIt.next();
+					RelativeValue ar = (RelativeValue) values.get(id);
+					// NEED TO DO THIS A DIFFERENT WAY.
+					// if (ar != null)
+					// rts.getAllowedRelations().add(ar);
+				}
+
+			} else if (sType.equals("HierarchicalScale")) {
+
+				ms = new HierarchicalScale();
+
+				HierarchicalScale hts = (HierarchicalScale) ms;
+
+				Iterator<String> idIt = sValues.iterator();
+				while (idIt.hasNext()) {
+					String id = idIt.next();
+					HierarchicalValue av = (HierarchicalValue) values.get(id);
+					if (av != null)
+						hts.getHValues().add(av);
+				}
+
+			} else if (sType.equals("CompositeScale")) {
+
+				ms = new CompositeScale();
+
+				CompositeScale mvcs = (CompositeScale) ms;
+
+				compositeScales.put(mvcs, sValues);
+				subVariables.addAll(sValues);
+
+			} else if (sType.equals("FileScale")) {
+
+				ms = new FileScale();
+
+				FileScale fs = (FileScale) ms;
+
+				// Set the file extension in the first column
+				if (sValues.size() > 0)
+					fs.setSuffix(sValues.get(0));
+
+				if (sValues.size() > 1)
+					fs.setMimeType(sValues.get(1));
+
+			} else {
+
+				throw new Exception("Don't recognize " + sType
+						+ ", as a type of scale");
+
+			}
+
+			ms.setClassType(sType);
+
+			ms.setTermValue(sName);
+			ms.setShortTermId(sid);
+			ms.setDefinition(sDef);
+
+			scales.put(sid, ms);
+
+		}
+
+		vSheet = "OoEVV Variables";
+		vDim = this.getMatrixDimensions(vSheet);
+		ch = getColumnHeadings(vSheet);
+		int nVariables = vDim.height - 1;
+
+		Pattern whitespacePattern = Pattern.compile("\\s+");
+		Pattern slashPattern = Pattern.compile("\\/");
+		Pattern percentPattern = Pattern.compile("\\%");
+
+		for (int i = 0; i < nVariables; i++) {
+
+			Integer idCol = ch.get("shortId");
+			Integer nameCol = ch.get("name");
+			Integer defCol = ch.get("definition");
+			Integer termCol = ch.get("measures");
+			Integer scaleCol = ch.get("scale");
+			Integer comCol = ch.get("comments");
+			Integer curCol = ch.get("curator");
+			Integer ontIdCol = ch.get("ontologyId");
+
+			if (idCol == null || nameCol == null || defCol == null
+					|| termCol == null || scaleCol == null || comCol == null
+					|| curCol == null)
+				throw new Exception(
+						"Misnamed Variable Definition column headings");
+
+			String vid = this.getData(i + 1, idCol, vSheet);
+
+			// trim leading and trailing whitespace
+			vid = vid.replaceAll("(\\s+)$", "");
+			vid = vid.replaceAll("^(\\s+)", "");
+
+			String vName = this.getData(i + 1, nameCol, vSheet);
+			String vDef = this.getData(i + 1, defCol, vSheet);
+			String vMeasures = this.getData(i + 1, termCol, vSheet);
+			String vScaleName = this.getData(i + 1, scaleCol, vSheet);
+			String vComments = this.getData(i + 1, comCol, vSheet);
+			String vCurator = this.getData(i + 1, curCol, vSheet);
+
+			String ontIdStr = this.getData(i + 1, ontIdCol, vSheet);
+			if (ontIdStr.lastIndexOf(".") != -1)
+				ontIdStr = ontIdStr.substring(0, ontIdStr.lastIndexOf("."));
+
+			if (vName.length() == 0)
+				continue;
+
+			Matcher m1 = whitespacePattern.matcher(vid);
+
+			Term measures = null;
+			if (ontIdStr.length() > 0 && includeLookup) {
+
+				Integer ontId = new Integer(ontIdStr);
+				List<Ontology> ontHits = new ArrayList<Ontology>();
+				List<Term> measureHits = new ArrayList<Term>();
+				try {
+					measureHits = bps.termSearch(ontId, vMeasures);
+					ontHits = bps.ontologySearch(ontId);
+				} catch (IOException e) {
+					log.debug("Bioportal seems to be down");
+				}
+
+				if (measureHits.size() == 1) {
+
+					measures = measureHits.get(0);
+					Ontology o = ontHits.get(0);
+					measures.setOntology(o);
+
+				} else {
+
+					throw new Exception(vMeasures + " returns "
+							+ measureHits.size()
+							+ " results, should be unique.");
+
+				}
+
+			}
+
+			ExperimentalVariable v = new ExperimentalVariable();
+			v.setElementType("ExperimentalVariable");
+			if (subVariables.contains(vid)) {
+				SubVariable subV = new SubVariable();
+				v = subV;
+				v.setElementType("SubVariable");
+			}
+			v.setTermValue(vName);
+			v.setShortTermId(vid);
+			v.setDefinition(vDef);
+			v.setMeasures(measures);
+
+			if (vScaleName.length() != 0 && !vScaleName.equals("-")) {
+				MeasurementScale ms = scales.get(vScaleName);
+				if (ms == null)
+					throw new Exception("Can't find scale named '" + vScaleName
+							+ "'!");
+				v.setScale(ms);
+			}
+
+			v.getOoevvSet().add(this.exptVbSet);
+			this.exptVbSet.getOoevvEls().add(v);
+
+			exVbLookup.put(v.getShortTermId(), v);
+
+		}
+
+		vSheet = "OoEVV Processes";
+		vDim = this.getMatrixDimensions(vSheet);
+		ch = getColumnHeadings(vSheet);
+		int nProcesses = vDim.height - 1;
+
+		for (int i = 0; i < nProcesses; i++) {
+
+			Integer idCol = ch.get("shortId");
+			Integer nameCol = ch.get("name");
+			Integer defCol = ch.get("definition");
+			Integer termCol = ch.get("obi");
+			Integer comCol = ch.get("comments");
+			Integer curCol = ch.get("curator");
+
+			if (idCol == null || nameCol == null || defCol == null
+					|| termCol == null || comCol == null || curCol == null)
+				throw new Exception(
+						"Misnamed Variable Definition column headings");
+
+			String vid = this.getData(i + 1, idCol, vSheet);
+
+			// trim leading and trailing whitespace
+			vid = vid.replaceAll("(\\s+)$", "");
+			vid = vid.replaceAll("^(\\s+)", "");
+
+			String vName = this.getData(i + 1, nameCol, vSheet);
+			String vDef = this.getData(i + 1, defCol, vSheet);
+			String vObi = this.getData(i + 1, termCol, vSheet);
+			String vComments = this.getData(i + 1, comCol, vSheet);
+			String vCurator = this.getData(i + 1, curCol, vSheet);
+
+			if (vName.length() == 0)
+				continue;
+
+			Matcher m1 = whitespacePattern.matcher(vid);
+
+			Term obi = null;
+			if (vObi.length() > 0 && includeLookup) {
+
+				Integer ontId = new Integer(1123);
+				List<Ontology> ontHits = new ArrayList<Ontology>();
+				List<Term> measureHits = new ArrayList<Term>();
+				try {
+					measureHits = bps.termSearch(ontId, vObi);
+					ontHits = bps.ontologySearch(ontId);
+				} catch (IOException e) {
+					log.debug("Bioportal seems to be down");
+					continue;
+				}
+
+				if (measureHits.size() == 1) {
+
+					obi = measureHits.get(0);
+					Ontology o = ontHits.get(0);
+					obi.setOntology(o);
+
+				} else {
+
+					throw new Exception(vObi + " returns " + measureHits.size()
+							+ " results, should be unique.");
+
+				}
+
+			}
+
+			OoevvProcess v = new OoevvProcess();
+			v.setElementType("OoevvProcess");
+			v.setTermValue(vName);
+			v.setShortTermId(vid);
+			v.setDefinition(vDef);
+
+			v.setObiTerm(obi);
+
+			v.getOoevvSet().add(this.exptVbSet);
+			this.exptVbSet.getOoevvEls().add(v);
+
+		}
+
+		vSheet = "OoEVV Entities";
+		vDim = this.getMatrixDimensions(vSheet);
+		ch = getColumnHeadings(vSheet);
+		int nEntities = vDim.height - 1;
+
+		for (int i = 0; i < nEntities; i++) {
+
+			Integer idCol = ch.get("shortId");
+			Integer nameCol = ch.get("name");
+			Integer defCol = ch.get("definition");
+			Integer termCol = ch.get("obi");
+			Integer comCol = ch.get("comments");
+			Integer curCol = ch.get("curator");
+
+			if (idCol == null || nameCol == null || defCol == null
+					|| termCol == null || comCol == null || curCol == null)
+				throw new Exception(
+						"Misnamed Variable Definition column headings");
+
+			String vid = this.getData(i + 1, idCol, vSheet);
+
+			// trim leading and trailing whitespace
+			vid = vid.replaceAll("(\\s+)$", "");
+			vid = vid.replaceAll("^(\\s+)", "");
+
+			String vName = this.getData(i + 1, nameCol, vSheet);
+			String vDef = this.getData(i + 1, defCol, vSheet);
+			String vObi = this.getData(i + 1, termCol, vSheet);
+			String vComments = this.getData(i + 1, comCol, vSheet);
+			String vCurator = this.getData(i + 1, curCol, vSheet);
+
+			if (vName.length() == 0)
+				continue;
+
+			Matcher m1 = whitespacePattern.matcher(vid);
+			Term obi = null;
+			if (vObi.length() > 0 && includeLookup) {
+
+				Integer ontId = new Integer(1123);
+				List<Ontology> ontHits = new ArrayList<Ontology>();
+				List<Term> measureHits = new ArrayList<Term>();
+				try {
+					measureHits = bps.termSearch(ontId, vObi);
+					ontHits = bps.ontologySearch(ontId);
+				} catch (IOException e) {
+					log.debug("Bioportal seems to be down");
+				}
+
+				if (measureHits.size() == 1) {
+
+					obi = measureHits.get(0);
+					Ontology o = ontHits.get(0);
+					obi.setOntology(o);
+
+				} else {
+
+					throw new Exception(vObi + " returns " + measureHits.size()
+							+ " results, should be unique.");
+
+				}
+
+			}
+
+			OoevvEntity e = new OoevvEntity();
+			e.setElementType("OoevvEntity");
+			e.setTermValue(vName);
+			e.setShortTermId(vid);
+			e.setDefinition(vDef);
+			e.getOoevvSet().add(this.exptVbSet);
+			e.setObiTerm(obi);
+
+			this.exptVbSet.getOoevvEls().add(e);
+
+		}
+
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		// Now that we have a good list of variables constructed,
+		// we can link the multi-variable scales.
+		//
+		Pattern patt = Pattern.compile("^\\w+$");
+		Iterator<CompositeScale> compIt = compositeScales.keySet().iterator();
+		SCALE: while (compIt.hasNext()) {
+			CompositeScale mvcs = compIt.next();
+			List<String> subVbList = compositeScales.get(mvcs);
+			for (String subVbId : subVbList) {
+
+				Matcher match = patt.matcher(subVbId);
+				if (match.find() || subVbId.length() == 0) {
+					continue SCALE;
+				}
+
+				if (!exVbLookup.containsKey(subVbId)) {
+					throw new Exception("Can't find " + subVbId
+							+ " in specification of "
+							+ "MultiVariableCompositeScale: "
+							+ mvcs.getShortTermId());
+				} else {
+					ExperimentalVariable ev = exVbLookup.get(subVbId);
+					SubVariable sv = (SubVariable) ev;
+					mvcs.getHasParts().add(sv);
+					sv.getPartOf().add(mvcs);
+				}
+			}
+		}
+
+		return this.exptVbSet;
+
+	}*/
 
 	public void generateBlankSubjectMatterExpertWorkbook(File file)
 			throws Exception {
