@@ -184,6 +184,7 @@
 		<dependency>
 			<groupId>edu.isi.bmkeg</groupId>
 			<artifactId>vpdmfBigData</artifactId>
+			<type>jar</type>
 		</dependency>
 
 		<dependency>
