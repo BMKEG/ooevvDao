@@ -4,6 +4,7 @@
 package edu.isi.bmkeg.ooevv.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -68,6 +69,10 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 	
 	public ExtendedOoevvDaoImpl() throws Exception {}
 
+	public ExtendedOoevvDaoImpl(CoreDao coreDao) throws Exception {
+		this.coreDao = coreDao;
+	}
+	
 	public void init(String login, String password, String uri, String wd) throws Exception {
 		
 		if( coreDao == null ) {
@@ -205,54 +210,64 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			
 			ExperimentalVariable exptVb = (ExperimentalVariable) el;
 			
-			if (exptVb.getScale() != null) {
-
-				MeasurementScale ms = exptVb.getScale();
-
-				if (ms instanceof BinaryScaleWithNamedValues) {
-
-					BinaryScaleWithNamedValues bswnv = (BinaryScaleWithNamedValues) ms;
-					values.add(bswnv.getTrueValue());
-					values.add(bswnv.getFalseValue());
-
-				} else if (ms instanceof NominalScaleWithAllowedTerms) {
-
-					NominalScaleWithAllowedTerms nswat = (NominalScaleWithAllowedTerms) ms;
-					Iterator<NominalValue> tIt = nswat.getNVal()
-							.iterator();
-					while (tIt.hasNext()) {
-						NominalValue nv = tIt.next();
-						values.add(nv);
-					}
-
-				} else if (ms instanceof OrdinalScaleWithNamedRanks) {
-
-					OrdinalScaleWithNamedRanks pswnr = (OrdinalScaleWithNamedRanks) ms;
-					Iterator<OrdinalValue> tIt = pswnr.getOVal()
-							.iterator();
-					while (tIt.hasNext()) {
-						OrdinalValue ov = tIt.next();
-						values.add(ov);
-					}
-
-				} else if (ms instanceof HierarchicalScale) {
-
-					HierarchicalScale hts = (HierarchicalScale) ms;
-					Iterator<HierarchicalValue> tIt = hts
-							.getHValues().iterator();
-					while (tIt.hasNext()) {
-						HierarchicalValue hv = tIt.next();
-						values.add(hv);
-					}
-
-				}
-
-			}
+			values.addAll(extractValuesFromVariable(exptVb).values());
 
 		}
 
 		return values;
 
+	}
+
+	public static Map<String, MeasurementValue> extractValuesFromVariable(
+			ExperimentalVariable exptVb) {
+
+		Map<String, MeasurementValue> values = new HashMap<String, MeasurementValue>();
+		
+		if (exptVb.getScale() == null) 
+				return values;		
+
+		MeasurementScale ms = exptVb.getScale();
+
+		if (ms instanceof BinaryScaleWithNamedValues) {
+
+			BinaryScaleWithNamedValues bswnv = (BinaryScaleWithNamedValues) ms;
+			values.put(bswnv.getTrueValue().getShortTermId(), bswnv.getTrueValue());
+			values.put(bswnv.getFalseValue().getShortTermId(), bswnv.getFalseValue());
+
+		} else if (ms instanceof NominalScaleWithAllowedTerms) {
+
+			NominalScaleWithAllowedTerms nswat = (NominalScaleWithAllowedTerms) ms;
+			Iterator<NominalValue> tIt = nswat.getNVal()
+					.iterator();
+			while (tIt.hasNext()) {
+				NominalValue nv = tIt.next();
+				values.put(nv.getShortTermId(), nv);
+			}
+
+		} else if (ms instanceof OrdinalScaleWithNamedRanks) {
+
+			OrdinalScaleWithNamedRanks pswnr = (OrdinalScaleWithNamedRanks) ms;
+			Iterator<OrdinalValue> tIt = pswnr.getOVal()
+					.iterator();
+			while (tIt.hasNext()) {
+				OrdinalValue ov = tIt.next();
+				values.put(ov.getShortTermId(), ov);
+			}
+
+		} else if (ms instanceof HierarchicalScale) {
+
+			HierarchicalScale hts = (HierarchicalScale) ms;
+			Iterator<HierarchicalValue> tIt = hts
+					.getHValues().iterator();
+			while (tIt.hasNext()) {
+				HierarchicalValue hv = tIt.next();
+				values.put(hv.getShortTermId(), hv);
+			}
+
+		}
+
+		return values;
+		
 	}
 
 	public static Set<Term> listTerms(OoevvElementSet exptVbSet) {
@@ -407,175 +422,34 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 			//
 			// 2. insert all the different MeasurementValues as views
 			//
-			Iterator<MeasurementValue> vIt = values.iterator();
-			while (vIt.hasNext()) {
-				MeasurementValue v = vIt.next();
-
-				MeasurementValue_qo vQ = new MeasurementValue_qo();
-				vQ.setShortTermId( v.getShortTermId() );
-				l = coreDao.listInTrans(vQ, "MeasurementValue");
-				if( l.size() == 0 ) {
-					coreDao.insertInTrans(v, "MeasurementValue");
-				} else if (l.size() == 1) {
-					v.setVpdmfId( l.get(0).getVpdmfId() );
-					coreDao.updateInTrans(v, "MeasurementValue");
-				} else {
-					throw new Exception("Ambiguity in adding " + v.getShortTermId());
-				}
-
-			}
+			insertSetOfMeasurementValues(values);
 
 			//
 			// 3. insert all the different MeasurementScales as views
 			//
-			Iterator<MeasurementScale> sIt = scales.iterator();
-			while (sIt.hasNext()) {
-				MeasurementScale s = sIt.next();
-
-				if( s instanceof CompositeScale )
-					continue;
-
-				String sName = s.getClass().getName();
-				sName = sName.substring(sName.lastIndexOf(".") + 1,
-						sName.length());
-
-				MeasurementScale_qo sQ = new MeasurementScale_qo();
-				sQ.setShortTermId( s.getShortTermId() );
-				l = coreDao.listInTrans(sQ, "MeasurementScale");
-				if( l.size() == 0 ) {
-					coreDao.insertInTrans(s, sName);
-				} else if (l.size() == 1) {
-					s.setVpdmfId( l.get(0).getVpdmfId() );
-					coreDao.updateInTrans(s, sName);
-				} else {
-					throw new Exception("Ambiguity in adding " + s.getShortTermId());
-				}
-							
-			}
+			insertSetOfMeasurementScales(scales);
 
 			//
 			// 4. insert all the different Variables as views
 			//
-			Iterator<ExperimentalVariable> vbIt = exptVbs.iterator();
-			while (vbIt.hasNext()) {
-				ExperimentalVariable v = vbIt.next();
-
-				if( v.getScale() instanceof CompositeScale ) 
-					continue;
-				
-				String vName = v.getClass().getName();
-				vName = vName.substring(vName.lastIndexOf(".") + 1,
-						vName.length());
-
-				ExperimentalVariable_qo vQ = new ExperimentalVariable_qo();
-				vQ.setShortTermId( v.getShortTermId() );
-				l = coreDao.listInTrans(vQ, "ExperimentalVariable");
-				if( l.size() == 0 ) {
-					coreDao.insertInTrans(v, vName);
-				} else if (l.size() == 1) {
-					v.setVpdmfId( l.get(0).getVpdmfId() );
-					coreDao.updateInTrans(v, vName);
-				} else {
-					throw new Exception("Ambiguity in adding " + v.getShortTermId());
-				}
-			
-			}
+			insertSetOfExperimentalVariables(exptVbs);
 			
 			//
 			// 4a. repeat the insertion of the Composite Scales 
 			// to take into account the connections to the variables
-			//
-			sIt = scales.iterator();
-			while (sIt.hasNext()) {
-				MeasurementScale s = sIt.next();
-				
-				if( !(s instanceof CompositeScale) )
-					continue;
-				
-				String sName = s.getClass().getName();
-				sName = sName.substring(sName.lastIndexOf(".") + 1,
-						sName.length());
-				
-				MeasurementScale_qo sQ = new MeasurementScale_qo();
-				sQ.setShortTermId( s.getShortTermId() );
-				l = coreDao.listInTrans(sQ, "MeasurementScale");
-				if( l.size() == 0 ) {
-					coreDao.insertInTrans(s, sName);
-				} else if (l.size() == 1) {
-					s.setVpdmfId( l.get(0).getVpdmfId() );
-					coreDao.updateInTrans(s, sName);
-				} else {
-					throw new Exception("Ambiguity in adding " + s.getShortTermId());
-				}
-
-			}
-
-			//
 			// 4b. Now fill in the accompanying variables
 			//
-			vbIt = exptVbs.iterator();
-			while (vbIt.hasNext()) {
-				ExperimentalVariable v = vbIt.next();
-				
-				if( !(v.getScale() instanceof CompositeScale) ) 
-					continue;
-				
-				ExperimentalVariable_qo vQ = new ExperimentalVariable_qo();
-				vQ.setShortTermId( v.getShortTermId() );
-				l = coreDao.listInTrans(vQ, "ExperimentalVariable");
-				if( l.size() == 0 ) {
-					coreDao.insertInTrans(v, "ExperimentalVariable");
-				} else if (l.size() == 1) {
-					v.setVpdmfId( l.get(0).getVpdmfId() );
-					coreDao.updateInTrans(v, "ExperimentalVariable");
-				} else {
-					throw new Exception("Ambiguity in adding " + v.getShortTermId());
-				}								
-				
-			}
-
+			insertSetOfCompositeVariablesAndScales(exptVbs, scales);
 			
 			//
 			// 5. insert all the different Processes as views
 			//
-			Iterator<OoevvProcess> pIt = procs.iterator();
-			while (pIt.hasNext()) {
-				OoevvProcess v = pIt.next();
-
-				OoevvProcess_qo vQ = new OoevvProcess_qo();
-				vQ.setShortTermId( v.getShortTermId() );
-				l = coreDao.listInTrans(vQ, "OoevvProcess");
-				if( l.size() == 0 ) {
-					coreDao.insertInTrans(v, "OoevvProcess");
-				} else if (l.size() == 1) {
-					v.setVpdmfId( l.get(0).getVpdmfId() );
-					coreDao.updateInTrans(v, "OoevvProcess");
-				} else {
-					throw new Exception("Ambiguity in adding " + v.getShortTermId());
-				}
-
-			}
+			insertSetOfOoevvProcesses(procs);
 
 			//
 			// 6. insert all the different Entities as views
 			//
-			Iterator<OoevvEntity> entIt = ents.iterator();
-			while (entIt.hasNext()) {
-				OoevvEntity v = entIt.next();
-
-				OoevvEntity_qo vQ = new OoevvEntity_qo();
-				vQ.setShortTermId( v.getShortTermId() );
-				l = coreDao.listInTrans(vQ, "OoevvEntity");
-				if( l.size() == 0 ) {
-					coreDao.insertInTrans(v, "OoevvEntity");
-				} else if (l.size() == 1) {
-					v.setVpdmfId( l.get(0).getVpdmfId() );
-					coreDao.updateInTrans(v, "OoevvEntity");
-				} else {
-					throw new Exception("Ambiguity in adding " + v.getShortTermId());
-				}									
-
-			}
+			insertSetOfOoevvEntities(ents);
 			
 			coreDao.getCe().commitTransaction();
 
@@ -591,6 +465,201 @@ public class ExtendedOoevvDaoImpl implements ExtendedOoevvDao {
 
 		}
 
+	}
+
+	/**
+	 * @param ents
+	 * @throws Exception
+	 */
+	public void insertSetOfOoevvEntities(Set<OoevvEntity> ents)
+			throws Exception {
+		Iterator<OoevvEntity> entIt = ents.iterator();
+		while (entIt.hasNext()) {
+			OoevvEntity v = entIt.next();
+
+			OoevvEntity_qo vQ = new OoevvEntity_qo();
+			vQ.setShortTermId( v.getShortTermId() );
+			List<LightViewInstance> l2 = coreDao.listInTrans(vQ, "OoevvEntity");
+			if( l2.size() == 0 ) {
+				coreDao.insertInTrans(v, "OoevvEntity");
+			} else if (l2.size() == 1) {
+				v.setVpdmfId( l2.get(0).getVpdmfId() );
+				coreDao.updateInTrans(v, "OoevvEntity");
+			} else {
+				throw new Exception("Ambiguity in adding " + v.getShortTermId());
+			}									
+
+		}
+	}
+
+	/**
+	 * @param procs
+	 * @throws Exception
+	 */
+	public void insertSetOfOoevvProcesses(Set<OoevvProcess> procs) throws Exception {
+		Iterator<OoevvProcess> pIt = procs.iterator();
+		while (pIt.hasNext()) {
+			OoevvProcess v = pIt.next();
+
+			OoevvProcess_qo vQ = new OoevvProcess_qo();
+			vQ.setShortTermId( v.getShortTermId() );
+			List<LightViewInstance> l2 = coreDao.listInTrans(vQ, "OoevvProcess");
+			if( l2.size() == 0 ) {
+				coreDao.insertInTrans(v, "OoevvProcess");
+			} else if (l2.size() == 1) {
+				v.setVpdmfId( l2.get(0).getVpdmfId() );
+				coreDao.updateInTrans(v, "OoevvProcess");
+			} else {
+				throw new Exception("Ambiguity in adding " + v.getShortTermId());
+			}
+
+		}
+	}
+
+	/**
+	 * @param exptVbs
+	 * @param scales
+	 * @throws Exception
+	 */
+	public void insertSetOfCompositeVariablesAndScales(
+			Set<ExperimentalVariable> exptVbs,
+			Set<MeasurementScale> scales)
+			throws Exception {
+		
+		Iterator<MeasurementScale> sIt = scales.iterator();
+		while (sIt.hasNext()) {
+			MeasurementScale s = sIt.next();
+			
+			if( !(s instanceof CompositeScale) )
+				continue;
+			
+			String sName = s.getClass().getName();
+			sName = sName.substring(sName.lastIndexOf(".") + 1,
+					sName.length());
+			
+			MeasurementScale_qo sQ = new MeasurementScale_qo();
+			sQ.setShortTermId( s.getShortTermId() );
+			List<LightViewInstance> l2 = coreDao.listInTrans(sQ, "MeasurementScale");
+			if( l2.size() == 0 ) {
+				coreDao.insertInTrans(s, sName);
+			} else if (l2.size() == 1) {
+				s.setVpdmfId( l2.get(0).getVpdmfId() );
+				coreDao.updateInTrans(s, sName);
+			} else {
+				throw new Exception("Ambiguity in adding " + s.getShortTermId());
+			}
+
+		}
+
+		Iterator<ExperimentalVariable> vbIt = exptVbs.iterator();
+		while (vbIt.hasNext()) {
+			ExperimentalVariable v = vbIt.next();
+			
+			if( !(v.getScale() instanceof CompositeScale) ) 
+				continue;
+			
+			ExperimentalVariable_qo vQ = new ExperimentalVariable_qo();
+			vQ.setShortTermId( v.getShortTermId() );
+			List<LightViewInstance> l2 = coreDao.listInTrans(vQ, "ExperimentalVariable");
+			if( l2.size() == 0 ) {
+				coreDao.insertInTrans(v, "ExperimentalVariable");
+			} else if (l2.size() == 1) {
+				v.setVpdmfId( l2.get(0).getVpdmfId() );
+				coreDao.updateInTrans(v, "ExperimentalVariable");
+			} else {
+				throw new Exception("Ambiguity in adding " + v.getShortTermId());
+			}								
+			
+		}
+	}
+
+	/**
+	 * @param exptVbs
+	 * @throws Exception
+	 */
+	public void insertSetOfExperimentalVariables(
+			Set<ExperimentalVariable> exptVbs) throws Exception {
+		Iterator<ExperimentalVariable> vbIt = exptVbs.iterator();
+		while (vbIt.hasNext()) {
+			ExperimentalVariable v = vbIt.next();
+
+			if( v.getScale() instanceof CompositeScale ) 
+				continue;
+			
+			String vName = v.getClass().getName();
+			vName = vName.substring(vName.lastIndexOf(".") + 1,
+					vName.length());
+
+			ExperimentalVariable_qo vQ = new ExperimentalVariable_qo();
+			vQ.setShortTermId( v.getShortTermId() );
+			List<LightViewInstance> l2 = coreDao.listInTrans(vQ, "ExperimentalVariable");
+			if( l2.size() == 0 ) {
+				coreDao.insertInTrans(v, vName);
+			} else if (l2.size() == 1) {
+				v.setVpdmfId( l2.get(0).getVpdmfId() );
+				coreDao.updateInTrans(v, vName);
+			} else {
+				throw new Exception("Ambiguity in adding " + v.getShortTermId());
+			}
+		
+		}
+	}
+
+	/**
+	 * @param scales
+	 * @throws Exception
+	 */
+	public void insertSetOfMeasurementScales(Set<MeasurementScale> scales)
+			throws Exception {
+		Iterator<MeasurementScale> sIt = scales.iterator();
+		while (sIt.hasNext()) {
+			MeasurementScale s = sIt.next();
+
+			if( s instanceof CompositeScale )
+				continue;
+
+			String sName = s.getClass().getName();
+			sName = sName.substring(sName.lastIndexOf(".") + 1,
+					sName.length());
+
+			MeasurementScale_qo sQ = new MeasurementScale_qo();
+			sQ.setShortTermId( s.getShortTermId() );
+			List<LightViewInstance> l2 = coreDao.listInTrans(sQ, "MeasurementScale");
+			if( l2.size() == 0 ) {
+				coreDao.insertInTrans(s, sName);
+			} else if (l2.size() == 1) {
+				s.setVpdmfId( l2.get(0).getVpdmfId() );
+				coreDao.updateInTrans(s, sName);
+			} else {
+				throw new Exception("Ambiguity in adding " + s.getShortTermId());
+			}
+						
+		}
+	}
+
+	/**
+	 * @param values
+	 * @throws Exception
+	 */
+	public void insertSetOfMeasurementValues(Set<MeasurementValue> values)
+			throws Exception {
+		Iterator<MeasurementValue> vIt = values.iterator();
+		while (vIt.hasNext()) {
+			MeasurementValue v = vIt.next();
+
+			MeasurementValue_qo vQ = new MeasurementValue_qo();
+			vQ.setShortTermId( v.getShortTermId() );
+			List<LightViewInstance> l2 = coreDao.listInTrans(vQ, "MeasurementValue");
+			if( l2.size() == 0 ) {
+				coreDao.insertInTrans(v, "MeasurementValue");
+			} else if (l2.size() == 1) {
+				v.setVpdmfId( l2.get(0).getVpdmfId() );
+				coreDao.updateInTrans(v, "MeasurementValue");
+			} else {
+				throw new Exception("Ambiguity in adding " + v.getShortTermId());
+			}
+
+		}
 	}
 	
 	public List<OoevvElementSet> listOoevvElementSetsFromName(String name)

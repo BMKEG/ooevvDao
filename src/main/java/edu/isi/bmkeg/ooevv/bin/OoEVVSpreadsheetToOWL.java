@@ -70,10 +70,10 @@ public class OoEVVSpreadsheetToOWL {
 
 		OoevvEngineImpl engine = new OoevvEngineImpl();
 		
-		if (!owlFile.exists())
+		/*if (!owlFile.exists())
 			engine.saveOoevvSystemAsOwl(top, owlFile, uri, ".model.");
 
-		engine.saveOoevvElementSetToOwl(top, exptVbSet, owlFile, uri);
+		engine.saveOoevvElementSetToOwl(top, exptVbSet, owlFile, uri);*/
 
 	}
 

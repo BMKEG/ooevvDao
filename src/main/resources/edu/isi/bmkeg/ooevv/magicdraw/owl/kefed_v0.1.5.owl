@@ -1,0 +1,1422 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://bmkeg.isi.edu/owl/kefed/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://bmkeg.isi.edu/owl/kefed/">
+    <Prefix name="ro" IRI="http://www.obofoundry.org/ro/ro.owl#"/>
+    <Prefix name="obo" IRI="http://purl.obolibrary.org/obo/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="xsp" IRI="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="snap" IRI="http://www.ifomis.org/bfo/1.1/snap#"/>
+    <Prefix name="swrl" IRI="http://www.w3.org/2003/11/swrl#"/>
+    <Prefix name="kefed" IRI="http://bmkeg.isi.edu/owl/kefed/"/>
+    <Prefix name="swrlb" IRI="http://www.w3.org/2003/11/swrlb#"/>
+    <Prefix name="kefed2" IRI="http://edu.isi.bmkeg/owl/kefed/"/>
+    <Prefix name="protege" IRI="http://protege.stanford.edu/plugins/owl/protege#"/>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="protege:defaultLanguage"/>
+        <Literal datatypeIRI="&xsd;string">en</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">null</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="KEfED_000000"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000001"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000002"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000003"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000004"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000005"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000006"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000007"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000010"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000012"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000013"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000014"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000015"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000017"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000019"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000020"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000024"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000025"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000026"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000027"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000028"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000033"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000034"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000035"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000036"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000037"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000038"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000039"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000042"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000043"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000046"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KEfED_000055"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="kefed2:KEfED_000059"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="kefed2:KEfED_000060"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000008"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000009"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000011"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000016"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000018"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000021"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000022"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000023"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000029"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000030"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000031"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000032"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000047"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000048"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000049"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000051"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000052"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000053"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000056"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="KEfED_000057"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="kefed2:KEfED_000061"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000000"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000056"/>
+                <Class IRI="KEfED_000046"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="ro:has_part"/>
+                <Class IRI="KEfED_000001"/>
+            </ObjectSomeValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="KEfED_000021"/>
+                <Class IRI="KEfED_000019"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000001"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty abbreviatedIRI="ro:part_of"/>
+            <Class IRI="KEfED_000000"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000002"/>
+        <ObjectIntersectionOf>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000295"/>
+                    <Class IRI="KEfED_000006"/>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000295"/>
+                    <Class IRI="KEfED_000038"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000312"/>
+                    <Class IRI="KEfED_000005"/>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000312"/>
+                    <Class IRI="KEfED_000006"/>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000312"/>
+                    <Class IRI="KEfED_000037"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:IAO_0000136"/>
+                <Class abbreviatedIRI="obo:IAO_0000030"/>
+            </ObjectAllValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="ro:has_part"/>
+                <Class IRI="KEfED_000012"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000003"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000049"/>
+                <Class IRI="KEfED_000037"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000051"/>
+                <Class IRI="KEfED_000038"/>
+            </ObjectSomeValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="KEfED_000023"/>
+                <Class IRI="KEfED_000010"/>
+            </ObjectAllValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="KEfED_000047"/>
+                <Class IRI="KEfED_000003"/>
+            </ObjectAllValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="KEfED_000048"/>
+                <Class IRI="KEfED_000003"/>
+            </ObjectAllValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000293"/>
+                <Class IRI="KEfED_000042"/>
+            </ObjectAllValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000299"/>
+                <Class IRI="KEfED_000042"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000004"/>
+        <ObjectIntersectionOf>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000295"/>
+                    <Class IRI="KEfED_000005"/>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000295"/>
+                    <Class IRI="KEfED_000007"/>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000295"/>
+                    <Class IRI="KEfED_000038"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000312"/>
+                    <Class IRI="KEfED_000007"/>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty abbreviatedIRI="obo:OBI_0000312"/>
+                    <Class IRI="KEfED_000037"/>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:IAO_0000136"/>
+                <Class abbreviatedIRI="snap:MaterialEntity"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000005"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000293"/>
+                <Class IRI="KEfED_000004"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000299"/>
+                <Class IRI="KEfED_000002"/>
+            </ObjectSomeValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:IAO_0000136"/>
+                <Class abbreviatedIRI="obo:OBI_0000070"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000006"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000293"/>
+                <Class IRI="KEfED_000002"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000299"/>
+                <Class IRI="KEfED_000002"/>
+            </ObjectSomeValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:IAO_0000136"/>
+                <Class abbreviatedIRI="obo:OBI_0200000"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000007"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000022"/>
+                <Class IRI="KEfED_000000"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000293"/>
+                <Class IRI="KEfED_000004"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000299"/>
+                <Class IRI="KEfED_000004"/>
+            </ObjectSomeValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:IAO_0000136"/>
+                <Class abbreviatedIRI="obo:OBI_0000094"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000010"/>
+        <ObjectIntersectionOf>
+            <ObjectUnionOf>
+                <ObjectAllValuesFrom>
+                    <ObjectProperty IRI="KEfED_000011"/>
+                    <Class IRI="KEfED_000002"/>
+                </ObjectAllValuesFrom>
+                <ObjectAllValuesFrom>
+                    <ObjectProperty IRI="KEfED_000011"/>
+                    <Class IRI="KEfED_000003"/>
+                </ObjectAllValuesFrom>
+                <ObjectAllValuesFrom>
+                    <ObjectProperty IRI="KEfED_000011"/>
+                    <Class IRI="KEfED_000004"/>
+                </ObjectAllValuesFrom>
+            </ObjectUnionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000016"/>
+                <Class IRI="KEfED_000017"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000030"/>
+                <Class IRI="KEfED_000024"/>
+            </ObjectSomeValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:IAO_0000136"/>
+                <Class abbreviatedIRI="obo:IAO_0000109"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000012"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty abbreviatedIRI="ro:part_of"/>
+            <Class IRI="KEfED_000002"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000017"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="KEfED_000018"/>
+            <Class IRI="KEfED_000010"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000019"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000022"/>
+                <Class IRI="KEfED_000000"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="ro:has_part"/>
+                <Class IRI="KEfED_000020"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000020"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty abbreviatedIRI="ro:part_of"/>
+            <Class IRI="KEfED_000019"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000024"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="KEfED_000029"/>
+            <Class IRI="KEfED_000010"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000025"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000029"/>
+                <Class IRI="KEfED_000012"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000031"/>
+                <Class IRI="KEfED_000028"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000026"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="KEfED_000029"/>
+            <Class IRI="KEfED_000013"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000028"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000023"/>
+                <Class IRI="KEfED_000026"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000032"/>
+                <Class IRI="KEfED_000025"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000037"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000052"/>
+                <Class IRI="KEfED_000003"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000299"/>
+                <Class IRI="KEfED_000042"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000038"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000053"/>
+                <Class IRI="KEfED_000003"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000293"/>
+                <Class IRI="KEfED_000042"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000039"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="KEfED_000052"/>
+            <Class IRI="KEfED_000055"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000042"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000295"/>
+                <Class IRI="KEfED_000003"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="obo:OBI_0000312"/>
+                <Class IRI="KEfED_000003"/>
+            </ObjectSomeValuesFrom>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="KEfED_000023"/>
+                <Class IRI="KEfED_000010"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000043"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="KEfED_000053"/>
+            <Class IRI="KEfED_000055"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000046"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="KEfED_000057"/>
+            <Class IRI="KEfED_000000"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KEfED_000055"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000049"/>
+                <Class IRI="KEfED_000039"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="KEfED_000051"/>
+                <Class IRI="KEfED_000043"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="KEfED_000002"/>
+        <Class IRI="KEfED_000042"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000003"/>
+        <Class IRI="KEfED_000001"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000004"/>
+        <Class IRI="KEfED_000042"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000005"/>
+        <Class IRI="KEfED_000003"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000006"/>
+        <Class IRI="KEfED_000003"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000007"/>
+        <Class IRI="KEfED_000003"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000010"/>
+        <Class IRI="KEfED_000001"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000012"/>
+        <Class IRI="KEfED_000010"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000013"/>
+        <Class IRI="KEfED_000010"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000014"/>
+        <Class IRI="KEfED_000013"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000015"/>
+        <Class IRI="KEfED_000013"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000017"/>
+        <Class IRI="KEfED_000001"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000024"/>
+        <Class IRI="KEfED_000020"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000025"/>
+        <Class IRI="KEfED_000024"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000026"/>
+        <Class IRI="KEfED_000024"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000027"/>
+        <Class IRI="KEfED_000025"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000027"/>
+        <Class IRI="KEfED_000033"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000028"/>
+        <Class IRI="KEfED_000020"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000033"/>
+        <Class IRI="KEfED_000020"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000034"/>
+        <Class IRI="KEfED_000033"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000035"/>
+        <Class IRI="KEfED_000033"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000036"/>
+        <Class IRI="KEfED_000003"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000037"/>
+        <Class IRI="KEfED_000036"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000038"/>
+        <Class IRI="KEfED_000036"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000039"/>
+        <Class IRI="KEfED_000037"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000042"/>
+        <Class IRI="KEfED_000001"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000043"/>
+        <Class IRI="KEfED_000038"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000046"/>
+        <Class IRI="KEfED_000003"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KEfED_000055"/>
+        <Class IRI="KEfED_000003"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="kefed2:KEfED_000059"/>
+        <Class IRI="KEfED_000036"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="kefed2:KEfED_000060"/>
+        <Class IRI="KEfED_000036"/>
+    </SubClassOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000008"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000009"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000011"/>
+        <ObjectProperty abbreviatedIRI="ro:participates_in"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000016"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000018"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000021"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000022"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000023"/>
+        <ObjectProperty abbreviatedIRI="ro:has_participant"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000029"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000030"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000031"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000032"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000047"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000048"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000049"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000051"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000052"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000053"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000056"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="KEfED_000057"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="KEfED_000008"/>
+        <ObjectProperty abbreviatedIRI="obo:OBI_0000293"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="KEfED_000011"/>
+        <ObjectProperty IRI="KEfED_000023"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="KEfED_000018"/>
+        <ObjectProperty IRI="KEfED_000016"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="KEfED_000022"/>
+        <ObjectProperty IRI="KEfED_000021"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="KEfED_000030"/>
+        <ObjectProperty IRI="KEfED_000029"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="KEfED_000031"/>
+        <ObjectProperty IRI="KEfED_000032"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="KEfED_000052"/>
+        <ObjectProperty IRI="KEfED_000049"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="KEfED_000053"/>
+        <ObjectProperty IRI="KEfED_000051"/>
+    </InverseObjectProperties>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000000</IRI>
+        <Literal datatypeIRI="&xsd;string">A knowledge representation describing the design of a scientific experiment formulated based on the &apos;Knowledge Engineering from Experimental Design&apos; model (KEfED). This includes (a) a representation of the design of the experiment, (b) a representation of the types of data measured in the experiment and (c) a representation of the types of observational assertions made within the experiment. </Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000000</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000000</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Model</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000001</IRI>
+        <Literal datatypeIRI="&xsd;string">An entity that forms part of a &apos;KEfED&apos; model.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000001</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000001</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_ModelElement</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000002</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_ModelElement that represents an information entity that is processed over the course of an experiment. </Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000002</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>KEfED_000002</IRI>
+        <Literal datatypeIRI="&xsd;string">This entity represents the actual informational encoding of the data generated in an experiment (including the data format and the other details). This is distinct from KEfED_Measurement classes that designate the variables (i.e. the underlying information that are contained within an individual KEfED_InformationArtifact). 
+
+It is likely that this information may be &apos;anonymous&apos; in many instances, meaning that it may be excessive detail to attempt to record the exact way in which data is recorded throughout the course of an experiment. In those instances then we may collapse the KEfED_InformationArtifact and KEfED_Measurement entities together into a single representation within the application (but maintaining the separation in the underlying KEfED_Model).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000002</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_InformationArtifact</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000003</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfEDModelElement that represents a process.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000003</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000003</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Process</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000004</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_ModelElement that represents a material entity (bfo:material_entity). </Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000004</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000004</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_MaterialEntity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000005</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Process that represents an assay (i.e., is about an obi:assay term)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000005</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000005</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Assay</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000006</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Process that represents a data transformation (i.e. is about an &apos;obi:data transformation&apos; term).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000006</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000006</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_DataTransformation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000007</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Process that represents a material processing step (i.e. is about a obi:material processing term).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000007</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000007</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_MaterialProcessing</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000008</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">acts_as_input_for</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000009</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">acts_as_output_for</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000010</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_ModelElement that represents a &apos;measurement datum&apos; (IAO_0000107: a data item that links to a quality).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000010</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000010</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Variable</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000011</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">parameterizes</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000012</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Variable that has a value that is either measured or calculated during the course of an experiment.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000012</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000012</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Measurement</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000013</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Variable that has values which are assigned before the start of an experiment (could also be called an &apos;independent variable&apos;, a factor, etc.).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000013</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000013</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Parameter</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000014</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Parameter that has a value which is kept contstant over the course of an experiment.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000014</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000014</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Constant</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000015</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Parameter that denotes an unique identifier of either a KEfED_InformationEntity or a KEfED_MaterialObject</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000015</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000015</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_IdLabel</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000016</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">has_scale</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000017</IRI>
+        <Literal datatypeIRI="&xsd;string">A specfication of the values associated with a KEfED_Variable.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000017</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000017</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Scale</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000018</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">is_scale_of</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000019</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">A container for the data and statistical assertions from a specific experiment (the design of which has been described with a KEfED model).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000019</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000019</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Experiment</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000020</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">A compositional part of a KEfED experiment.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000020</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000020</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_ExperimentElement</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000021</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">is_kefed_model_of</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000022</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">has_kefed_model</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000023</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">has_parameter</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000024</IRI>
+        <Literal datatypeIRI="&xsd;string">A value of a KEfED_Variable.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000024</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000024</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_VariableValue</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000025</IRI>
+        <Literal datatypeIRI="&xsd;string">A value of a KEfED_Measurement (associated with a KEfED_MeasurementContext)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000025</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000025</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_MeasurementValue</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000026</IRI>
+        <Literal datatypeIRI="&xsd;string">A value of a KEfED_Parameter.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000026</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000026</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_ParameterValue</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000027</IRI>
+        <Literal datatypeIRI="&xsd;string">A mean value statistically derived from a set of KEfED_MeasurementValues associated with a KEfED_Measurement.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000027</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000027</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_StatisticalMeanValue</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000028</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">A set of KEfED_Variable instances that describe the conditions under which measurement are made within a specific experiment.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000028</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000028</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_MeasurementContext</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000029</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">has_variable</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000030</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">has_value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000031</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">has_context</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000032</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">is_context_of</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000033</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">Statistical observations derived from an specific scientific experiment expressed within the KEfED modeling formalism.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000033</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000033</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_ObservationalAssertion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000034</IRI>
+        <Literal datatypeIRI="&xsd;string">A statistically derived correlation between two sets of KEfED_MeasurementValues.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000034</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000034</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_StatisticalCorrelation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000035</IRI>
+        <Literal datatypeIRI="&xsd;string">A statistical relation between two KEfED_MeasurementValue instances associated with a single KEfED variable and that were measured under two different KEfED_MeasurementContexts.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000035</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000035</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_StatisticalRelation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000036</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfEDModelElement that represents a process that determines how another enclosing process executes.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000036</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000036</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_ProcessFlowPoint</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000037</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_ProcessFlowPoint that represents the start of a process.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000037</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000037</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_StartPoint</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000038</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_ProcessFlowPoint that represents the end of a process.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000038</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000038</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_EndPoint</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000039</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_StartPoint that represents the start of a looping process.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000039</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000039</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_LoopStartPoint</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000042</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>KEfED_000042</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_ModelElement that represents an continuant (bfo:continuant) in a scientific workflow.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>KEfED_000042</IRI>
+        <Literal datatypeIRI="&xsd;string">We do not use the distinction between independent and dependent continuents here. A KEfED_Entity may represent an information artifact or a material entity.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000042</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Entity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000043</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_EndPoint that represents the end of a looping process.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000043</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000043</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_LoopEndPoint</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000046</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Process that represents the complete process of the execution of an experiment.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000117"/>
+        <IRI>KEfED_000046</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000046</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_CompleteExperimentWorkflow</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000047</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">provides_input_to</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000048</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">receives_input_from</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000049</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">starts_with</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000051</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">ends_with</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000052</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">starts</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000053</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">ends</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000055</IRI>
+        <Literal datatypeIRI="&xsd;string">A KEfED_Process that represents the process that loops over a iterating KEfED_Variable.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="obo:IAO_0000115"/>
+        <IRI>KEfED_000055</IRI>
+        <Literal datatypeIRI="&xsd;string">Gully A. P. C. Burns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000055</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_Loop</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000056</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">has_workflow</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>KEfED_000057</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">is_workflow_of</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>kefed2:KEfED_000059</AbbreviatedIRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_BranchPoint</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>kefed2:KEfED_000060</AbbreviatedIRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">KEfED_ForkPoint</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>kefed2:KEfED_000061</AbbreviatedIRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">uid</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="kefed2:KEfED_000063"/>
+        <AbbreviatedIRI>owl:Thing</AbbreviatedIRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral"></Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

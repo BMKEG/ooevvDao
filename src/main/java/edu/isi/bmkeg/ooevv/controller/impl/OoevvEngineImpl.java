@@ -348,7 +348,7 @@ public class OoevvEngineImpl implements OoevvEngine {
 				continue;
 			}
 	
-			owlUtil.addClass(c.readClassAddress(), o);
+			owlUtil.addClass(c.readPrefix() + ":" + c.getBaseName(), o);
 			owlUtil.addNameComment(c.readClassAddress(), c.getBaseName(), o);
 	
 			String docs = c.getDocumentation();
@@ -382,8 +382,8 @@ public class OoevvEngineImpl implements OoevvEngine {
 					continue;
 				}
 	
-				owlUtil.addSubClassToClass(parent.readClassAddress(),
-						c.readClassAddress(), o);
+				owlUtil.addSubClassToClass(parent.readPrefix() + ":" + parent.getBaseName(),
+						c.readPrefix() + ":" + c.getBaseName(), o);
 	
 			}
 	
@@ -448,7 +448,9 @@ public class OoevvEngineImpl implements OoevvEngine {
 		// owlUtil.addSubClassToClass(umlClass.readClassAddress(), shortTermId,
 		// o);*/
 	
-		owlUtil.addIndividualToClass(umlClass.readClassAddress(), shortTermId,
+		owlUtil.addIndividualToClass(
+				umlClass.readPrefix() + ":" + umlClass.getBaseName(), 
+				shortTermId,
 				o);
 		owlUtil.addNameComment(shortTermId, termValue, o);
 	
@@ -525,8 +527,10 @@ public class OoevvEngineImpl implements OoevvEngine {
 					|| tTerm.getShortTermId() == null)
 				continue;
 	
-			owlUtil.addObjectPropertyToIndividual(sTerm.getShortTermId(),
-					r.getBaseName(), tTerm.getShortTermId(), o);
+			owlUtil.addObjectPropertyToIndividual(
+					sTerm.getNamespace() + ": " + sTerm.getShortTermId(),
+					r.getBaseName(), 
+					tTerm.getNamespace() + ":" + tTerm.getShortTermId(), o);
 	
 		}
 	
